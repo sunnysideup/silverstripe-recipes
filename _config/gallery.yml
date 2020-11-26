@@ -1,0 +1,7 @@
+---
+name: gallery_mysite
+---
+
+PicsBlogEntry:
+  extensions:
+    - GalleryExtension

@@ -1,0 +1,24 @@
+---
+# SiteTree specific config for comments
+Name: commentssitetree
+only:
+  moduleexists: cms
+---
+PicsBlogEntry:
+  comments:
+    comments_per_page: 12
+    require_moderation: true
+    require_moderation_nonmembers: true
+    frontend_moderation: true
+    frontend_spam: false
+    html_allowed: false
+  extensions:
+    - CommentsExtension
+
+BlogPost:
+  can_create: false
+
+BlogPostSharedCategoriesExtension:
+  tags_checkboxes: false
+
+PicsBlogEntry:
