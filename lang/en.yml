@@ -1,0 +1,121 @@
+en:
+  SilverStripe\Blog\Admin\GridFieldCategorisationConfig:
+    Recipes: Recipes
+    Title: Title
+  SilverStripe\Blog\Admin\GridFieldMergeAction:
+    MovePostsTo: 'Move recipes to'
+  SilverStripe\Blog\Model\Blog:
+    DESCRIPTION: 'Adds a recipe to your website.'
+    LumberjackTitle: 'Recipes'
+    NoPosts: 'There are no Recipes'
+    PERMISSIONS_CATEGORY: 'Recipe permissions'
+    PERMISSION_MANAGE_USERS_DESCRIPTION: 'Manage users for individual Recipes'
+    PERMISSION_MANAGE_USERS_HELP: 'Allow assignment of Editors, Writers, or Contributors to Recipes'
+    PLURALNAME: Recipes
+    PLURALS:
+      one: 'A Recipe'
+      other: '{count} Recipes'
+    RecipesByUser: 'Recipes by {firstname} {surname} for {title}'
+    RecipesPerPage: 'Recipes Per Page'
+    ReadMoreAbout: 'Read more about ''{title}''...'
+    SINGULARNAME: Recipe
+    UsersContributorsFieldDescription: "Contributors have the ability to create or edit Recipes, but are unable to publish without\n                        authorisation of an editor. They are also unable to assign other contributing authors to any of\n                         their BlogPosts.<br />\n                        <br />\n                        Contributors have these permissions:<br />\n                        <br />\n                        Update any BlogPost they have authored or have been assigned to"
+    UsersEditorsFieldDescription: "An editor has control over specific Recipes, and all Recipes included within it.\n                     Short of being able to assign other editors to a blog, they are able to handle most changes to\n                     their assigned blog. <br /><br />\n                    Editors have these permissions:<br />\n                    <br />\n                    Update or publish any BlogPost in their Blog<br />\n                    Update or publish their Blog<br />\n                    Assign/unassign writers to their Recipe<br />\n                    Assign/unassign contributors to their Recipe<br />\n                    Assign/unassign any member as an author of a particular BlogPost"
+    UsersWritersFieldDescription: "A writer has full control over creating, editing and publishing BlogPosts they have authored\n                      or have been assigned to. Writers are unable to edit BlogPosts to which they are not assigned.\n                    <br /><br />\n                    Writers have these permissions:<br />\n                    <br />\n                    Update or publish any BlogPost they have authored or have been assigned to<br />\n                    Assign/unassign any member as an author of a particular BlogPost they have authored or have been\n                    assigned to"
+    WRITER: Writer
+  SilverStripe\Blog\Model\BlogCategory:
+    Duplicate: 'A Recipe category already exists with that name.'
+    PLURALNAME: 'Recipe Categories'
+    PLURALS:
+      one: 'A Recipe Category'
+      other: '{count} Recipe Categories'
+    SINGULARNAME: 'Recipe Category'
+  SilverStripe\Blog\Model\BlogMemberExtension:
+    BLOGPOSTS: 'Recipes'
+    TABBLOGPOSTS: 'Recipes'
+  SilverStripe\Blog\Model\BlogPost:
+    AUTHOR: Author
+    AdditionalCredits: 'Additional Credits'
+    AdditionalCredits_Description: 'If some authors of this post don''t have CMS access, enter their name(s) here. You can separate multiple names with a comma.'
+    Authors: Authors
+    CUSTOMSUMMARY: 'Add A Custom Summary'
+    Categories: Categories
+    FeaturedImage: 'Featured Image'
+    PLURALNAME: 'Recipes Recipes'
+    PLURALS:
+      one: 'A Recipe'
+      other: '{count} Recipes'
+    PageTitleLabel: 'Recipe Title'
+    PostOptions: 'Recipe Options'
+    PublishDate: 'Publish Date'
+    PublishDate_Description: 'Will be set to "now" if published without a value.'
+    SINGULARNAME: 'Blog Post'
+    SUMMARY_DESCRIPTION: 'If no summary is specified the first 30 words will be used.'
+    Tags: Tags
+  SilverStripe\Blog\Model\BlogPostFeaturedExtension:
+    FEATURED: 'Include Post in Feature Widget'
+  SilverStripe\Blog\Model\BlogTag:
+    Duplicate: 'A Recipe tag already exists with that name.'
+    PLURALNAME: 'Recipe Tags'
+    PLURALS:
+      one: 'A Recipe Tag'
+      other: '{count} Recipe Tags'
+    SINGULARNAME: 'Recipe Tag'
+  SilverStripe\Blog\Widgets\BlogArchiveWidget:
+    ArchiveType: ArchiveType
+    Blog: Recipe
+    NumberToDisplay: 'No. to Display'
+    PLURALNAME: 'Recipe Archive Widgets'
+    PLURALS:
+      one: 'A Recipe Archive Widget'
+      other: '{count} Recipe Archive Widgets'
+    SINGULARNAME: 'Recipe Archive Widget'
+  SilverStripe\Blog\Widgets\BlogCategoriesWidget:
+    Blog: Blog
+    Direction: Direction
+    Direction_Description: 'Change the direction of ordering of categories shown by this widget.'
+    Limit: Limit
+    Limit_Description: 'Limit the number of categories shown by this widget (set to 0 to show all categories).'
+    PLURALNAME: 'Recipe Categories Widgets'
+    PLURALS:
+      one: 'A Recipe Categories Widget'
+      other: '{count} Recipe Categories Widgets'
+    SINGULARNAME: 'Recipe Categories Widget'
+    Sort: Sort
+    Sort_Description: 'Change the order of categories shown by this widget.'
+  SilverStripe\Blog\Widgets\BlogFeaturedPostsWidget:
+    Blog: Blog
+    NumberOfPosts: 'Number of Recipes'
+    PLURALNAME: 'Blog Featured Recipes Widgets'
+    PLURALS:
+      one: 'A Recipe Featured Recipes Widget'
+      other: '{count} Recipe Featured Recipes Widgets'
+    SINGULARNAME: 'Blog Featured Recipes Widget'
+  SilverStripe\Blog\Widgets\BlogRecentPostsWidget:
+    Blog: Blog
+    NumberOfPosts: 'Number of Recipes'
+    PLURALNAME: 'Blog Recent Recipes Widgets'
+    PLURALS:
+      one: 'A Recipe Recent Recipes Widget'
+      other: '{count} Recipe Recent Recipes Widgets'
+    SINGULARNAME: 'Blog Recent Recipes Widget'
+  SilverStripe\Blog\Widgets\BlogTagsCloudWidget:
+    Blog: Blog
+    PLURALNAME: 'Recipe Tags Cloud Widgets'
+    PLURALS:
+      one: 'A Recipe Tags Cloud Widget'
+      other: '{count} Recipe Tags Cloud Widgets'
+    SINGULARNAME: 'Recipe Tags Cloud Widget'
+  SilverStripe\Blog\Widgets\BlogTagsWidget:
+    Blog: Blog
+    Direction: Direction
+    Direction_Description: 'Change the direction of ordering of tags shown by this widget.'
+    Limit: Limit
+    Limit_Description: 'Limit the number of tags shown by this widget (set to 0 to show all tags).'
+    PLURALNAME: 'Recipe Tags Widgets'
+    PLURALS:
+      one: 'A Recipe Tags Widget'
+      other: '{count} Recipe Tags Widgets'
+    SINGULARNAME: 'Recipe Tags Widget'
+    Sort: Sort
+    Sort_Description: 'Change the order of tags shown by this widget.'

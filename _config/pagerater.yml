@@ -1,0 +1,8 @@
+# PageRaterStarField:
+#   allow_comments: true
+#   allow_name: true
+#   allow_title: true
+#
+#
+# PageRaterExtensionController:
+#   only_show_approved: true

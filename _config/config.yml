@@ -1,0 +1,17 @@
+---
+Name: recipes
+After:
+  - '#coreconfig'
+---
+
+SilverStripe\Blog\Model\BlogCategory:
+  extensions:
+    - Sunnysideup\Recipes\Extensions\BlogCategoryExtension
+  singular_name: Category
+  plural_name: Categories
+
+SilverStripe\Blog\Model\BlogTag:
+  extensions:
+    - Sunnysideup\Recipes\Extensions\BlogTagExtension
+  singular_name: Category
+  plural_name: Categories

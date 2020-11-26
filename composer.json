@@ -1,0 +1,41 @@
+{
+    "name": "sunnysideup/recipes",
+    "type": "silverstripe-vendormodule",
+    "description": "recipes",
+    "keywords": [
+        "Silverstripe-CMS",
+        "CMS",
+        "Silverstripe",
+        "recipes",
+        "cooking",
+        "ingredients"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Nicolaas Francken",
+            "email": "modules@sunnysideup.co.nz",
+            "role": "lead developer"
+        }
+    ],
+    "require": {
+        "silverstripe/blog": "^3.6",
+
+        "sunnysideup/pdf_upload_field": "dev-master",
+        "sunnysideup/perfect_cms_images": "dev-master",
+        "sunnysideup/grid-field-send-to-bottom-action": "dev-master",
+        "sunnysideup/cms-niceties": "dev-master",
+        "sunnysideup/yes-no-any-filter": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sunnysideup\\Recipes\\": "src/"
+        }
+    },
+    "extra": {
+        "expose": [
+            "client/images",
+            "client/dist"
+        ]
+    }
+}

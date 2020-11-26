@@ -1,0 +1,7 @@
+# ---
+# name: gallery_app
+# ---
+#
+# Sunnysideup\Recipes\Pages\Recipe:
+#   extensions:
+#     - GalleryExtension

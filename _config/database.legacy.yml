@@ -1,0 +1,7 @@
+SilverStripe\ORM\DatabaseAdmin:
+  classname_value_remapping:
+    GridFieldSiteTreeStateExtension: Sunnysideup\Recipes\Forms\GridField\GridFieldSiteTreeStateExtension
+    Recipe_Controller: Sunnysideup\Recipes\Pages\Recipe_Controller
+    RecipeHolder_Controller: Sunnysideup\Recipes\Pages\RecipeHolder_Controller
+    Recipe: Sunnysideup\Recipes\Pages\Recipe
+    RecipeHolder: Sunnysideup\Recipes\Pages\RecipeHolder
