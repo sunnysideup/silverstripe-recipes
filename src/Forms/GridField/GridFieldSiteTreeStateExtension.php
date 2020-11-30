@@ -1,5 +1,11 @@
 <?php
 
+namespace Sunnysideup\Recipes\Forms\GridField;
+
+use GridFieldSiteTreeState;
+use DBField;
+
+
 class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
 {
 

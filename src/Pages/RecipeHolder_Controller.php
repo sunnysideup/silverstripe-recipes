@@ -1,5 +1,12 @@
 <?php
 
+namespace Sunnysideup\Recipes\Pages;
+
+use Blog_Controller;
+use ArrayList;
+use PaginatedList;
+
+
 class RecipeHolder_Controller extends Blog_Controller
 {
 
