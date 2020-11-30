@@ -2,24 +2,13 @@
 
 namespace Sunnysideup\Recipes\Forms\GridField;
 
-
-
 use SilverStripe\Assets\Image;
+use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
-
-
 
 class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
 {
-
-
-    protected function MyColsCustom()
-    {
-        return [];
-
-    }
     public function augmentColumns($gridField, &$columns)
     {
         // Ensure Actions always appears as the last column.
@@ -30,7 +19,7 @@ class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
             [
                 'Created',
                 'Categories',
-                'Tags'
+                'Tags',
             ]
         );
         parent::augmentColumns($gridField, $columns);
@@ -43,7 +32,7 @@ class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
                 'CMSThumbnail',
                 'Created',
                 'Categories',
-                'Tags'
+                'Tags',
             ],
             $this->MyColsCustom(),
             parent::getColumnsHandled($gridField)
@@ -56,27 +45,27 @@ class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
             case 'CMSThumbnail':
                 return [
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD:  => 'Image' (case sensitive)
-  * NEW:  => 'Image' (COMPLEX)
-  * EXP: you may want to add ownership (owns)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
-                    "title" => Image::class
+                    /**
+                     * ### @@@@ START REPLACEMENT @@@@ ###
+                     * WHY: automated upgrade
+                     * OLD:  => 'Image' (case sensitive)
+                     * NEW:  => 'Image' (COMPLEX)
+                     * EXP: you may want to add ownership (owns)
+                     * ### @@@@ STOP REPLACEMENT @@@@ ###
+                     */
+                    'title' => Image::class,
                 ];
             case 'Created':
                 return [
-                    "title" => 'Created'
+                    'title' => 'Created',
                 ];
             case 'Categories':
                 return [
-                    "title" => 'Categories'
+                    'title' => 'Categories',
                 ];
             case 'Tags':
                 return [
-                    "title" => 'Tags'
+                    'title' => 'Tags',
                 ];
             default:
                 return parent::getColumnMetaData($gridField, $columnName);
@@ -85,30 +74,33 @@ class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
 
     public function getColumnContent($gridField, $record, $columnName)
     {
-        if ($columnName == "CMSThumbnail") {
+        if ($columnName === 'CMSThumbnail') {
             $image = $record->FeaturedImage();
-            if($image && $image->exists()) {
+            if ($image && $image->exists()) {
                 $image = $image->CMSThumbnail();
-                return '<img src="'.$image->Link().'" />';
+                return '<img src="' . $image->Link() . '" />';
             }
             return $record->FeaturedImage()->CMSThumbnail();
-        } elseif ($columnName == "Created") {
+        } elseif ($columnName === 'Created') {
             return DBField::create_field(DBDatetime::class, $record->Created)->Ago();
-        } elseif ($columnName == "Categories") {
+        } elseif ($columnName === 'Categories') {
             $array = [];
-            foreach($record->Categories() as $tag) {
+            foreach ($record->Categories() as $tag) {
                 $array[$tag->ID] = $tag->Title;
             }
-            return '- '.implode('<br />- ', $array);
-        } elseif ($columnName == "Tags") {
+            return '- ' . implode('<br />- ', $array);
+        } elseif ($columnName === 'Tags') {
             $array = [];
-            foreach($record->Tags() as $tag) {
+            foreach ($record->Tags() as $tag) {
                 $array[$tag->ID] = $tag->Title;
             }
-            return '- '.implode('<br />- ', $array);
-        } else {
-            return parent::getColumnContent($gridField, $record, $columnName);
+            return '- ' . implode('<br />- ', $array);
         }
+        return parent::getColumnContent($gridField, $record, $columnName);
+    }
+
+    protected function MyColsCustom()
+    {
+        return [];
     }
 }
-

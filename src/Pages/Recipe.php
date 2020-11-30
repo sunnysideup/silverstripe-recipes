@@ -2,57 +2,42 @@
 
 namespace Sunnysideup\Recipes\Pages;
 
-
-
-
-
-
-
 use FeaturedProductImage;
 
 
 
 
-use PerfectCMSImagesUploadField;
-
-use YouTubeField;
 use GridFieldSendToBottomAction;
 
+use PerfectCMSImagesUploadField;
 use PicsBlogRecipes;
 
-
-use SilverStripe\Blog\Model\BlogPost;
-use SilverStripe\Assets\Image;
 use SilverStripe\Assets\File;
-use SilverStripe\Forms\Tab;
-use Sunnysideup\Recipes\Pages\Recipe;
-use SilverStripe\Forms\HeaderField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\NumericField;
-use Sunnysideup\PdfUpload\Forms\PDFUploadField;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Forms\CheckboxField;
-use SilverStripe\CMS\Model\SiteTree;
+
+
+use SilverStripe\Assets\Image;
 use SilverStripe\Blog\Model\BlogCategory;
+use SilverStripe\Blog\Model\BlogPost;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
-
-
-
-/**
- *
- */
+use Sunnysideup\PdfUpload\Forms\PDFUploadField;
+use YouTubeField;
 
 class Recipe extends BlogPost
 {
     private static $can_create = true;
 
     private static $hide_ancestor = BlogPost::class;
-
-
 
     /**
      * creates links to other objects
@@ -61,17 +46,14 @@ class Recipe extends BlogPost
      * @var array
      */
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * OLD: private static $db (case sensitive)
-  * NEW: 
-    private static $table_name = '[SEARCH_REPLACE_CLASS_NAME_GOES_HERE]';
-
+    /**
+     * ### @@@@ START REPLACEMENT @@@@ ###
+     * OLD: private static $db (case sensitive)
+     * NEW:
     private static $db (COMPLEX)
-  * EXP: Check that is class indeed extends DataObject and that it is not a data-extension!
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
-    
+     * EXP: Check that is class indeed extends DataObject and that it is not a data-extension!
+     * ### @@@@ STOP REPLACEMENT @@@@ ###
+     */
     private static $table_name = 'Recipe';
 
     private static $db = [
@@ -106,8 +88,9 @@ class Recipe extends BlogPost
      */
     private static $defaults = [
         'Ingredients1Header' => 'Ingredients',
-        'DirectionsHeader' => 'Directions'
+        'DirectionsHeader' => 'Directions',
     ];
+
     /**
      * creates links to other objects
      * create a has_many or has_one on the other side
@@ -116,60 +99,61 @@ class Recipe extends BlogPost
      */
     private static $has_one = [
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD:  => 'Image' (case sensitive)
-  * NEW:  => 'Image' (COMPLEX)
-  * EXP: you may want to add ownership (owns)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+        /**
+         * ### @@@@ START REPLACEMENT @@@@ ###
+         * WHY: automated upgrade
+         * OLD:  => 'Image' (case sensitive)
+         * NEW:  => 'Image' (COMPLEX)
+         * EXP: you may want to add ownership (owns)
+         * ### @@@@ STOP REPLACEMENT @@@@ ###
+         */
         'GrandFeaturedHomePageImage' => Image::class,
         'RecipePDF' => File::class,
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD:  => 'Image' (case sensitive)
-  * NEW:  => 'Image' (COMPLEX)
-  * EXP: you may want to add ownership (owns)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+        /**
+         * ### @@@@ START REPLACEMENT @@@@ ###
+         * WHY: automated upgrade
+         * OLD:  => 'Image' (case sensitive)
+         * NEW:  => 'Image' (COMPLEX)
+         * EXP: you may want to add ownership (owns)
+         * ### @@@@ STOP REPLACEMENT @@@@ ###
+         */
         'FeaturedImage2' => Image::class,
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD:  => 'Image' (case sensitive)
-  * NEW:  => 'Image' (COMPLEX)
-  * EXP: you may want to add ownership (owns)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+        /**
+         * ### @@@@ START REPLACEMENT @@@@ ###
+         * WHY: automated upgrade
+         * OLD:  => 'Image' (case sensitive)
+         * NEW:  => 'Image' (COMPLEX)
+         * EXP: you may want to add ownership (owns)
+         * ### @@@@ STOP REPLACEMENT @@@@ ###
+         */
         'FeaturedImage3' => Image::class,
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD:  => 'Image' (case sensitive)
-  * NEW:  => 'Image' (COMPLEX)
-  * EXP: you may want to add ownership (owns)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+        /**
+         * ### @@@@ START REPLACEMENT @@@@ ###
+         * WHY: automated upgrade
+         * OLD:  => 'Image' (case sensitive)
+         * NEW:  => 'Image' (COMPLEX)
+         * EXP: you may want to add ownership (owns)
+         * ### @@@@ STOP REPLACEMENT @@@@ ###
+         */
         'FeaturedImage4' => Image::class,
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD:  => 'Image' (case sensitive)
-  * NEW:  => 'Image' (COMPLEX)
-  * EXP: you may want to add ownership (owns)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+        /**
+         * ### @@@@ START REPLACEMENT @@@@ ###
+         * WHY: automated upgrade
+         * OLD:  => 'Image' (case sensitive)
+         * NEW:  => 'Image' (COMPLEX)
+         * EXP: you may want to add ownership (owns)
+         * ### @@@@ STOP REPLACEMENT @@@@ ###
+         */
         'FeaturedImage5' => Image::class,
         'RecommendedProduct1' => 'FeaturedProductImage',
         'RecommendedProduct2' => 'FeaturedProductImage',
-        'RecommendedProduct3' => 'FeaturedProductImage'
+        'RecommendedProduct3' => 'FeaturedProductImage',
     ];
+
     /**
      * creates links to other objects
      * create a has_many or has_one on the other side
@@ -178,7 +162,7 @@ class Recipe extends BlogPost
      */
     private static $casting = [
         'RecipesHTML' => 'HTMLText',
-        'Excerpt' => 'HTMLText'
+        'Excerpt' => 'HTMLText',
     ];
 
     public function getCMSFields()
@@ -204,22 +188,22 @@ class Recipe extends BlogPost
 
             $fields->addFieldsToTab(
                 'Root.RecipeMoreDetails',
-                array(
+                [
                     HeaderField::create('MyProducts', 'Related Products'),
                     DropdownField::create(
                         'RecommendedProduct1ID',
                         'Recommended Pics Product 1',
-                        array('' => '-- please select one --') + FeaturedProductImage::get()->map()->toArray()
+                        ['' => '-- please select one --'] + FeaturedProductImage::get()->map()->toArray()
                     ),
                     DropdownField::create(
                         'RecommendedProduct2ID',
                         'Recommended Pics Product 2',
-                        array('' => '-- please select one --') + FeaturedProductImage::get()->map()->toArray()
+                        ['' => '-- please select one --'] + FeaturedProductImage::get()->map()->toArray()
                     ),
                     DropdownField::create(
                         'RecommendedProduct3ID',
                         'Recommended Pics Product 3',
-                        array('' => '-- please select one --') + FeaturedProductImage::get()->map()->toArray()
+                        ['' => '-- please select one --'] + FeaturedProductImage::get()->map()->toArray()
                     ),
 
                     HeaderField::create('ContributorHeader', 'Contributor'),
@@ -228,14 +212,14 @@ class Recipe extends BlogPost
 
                     HeaderField::create('ServesHeader', 'Servings'),
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: NumericField::create (case sensitive)
-  * NEW: NumericField::create (COMPLEX)
-  * EXP: check the number of decimals required and add as ->setScale(2)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+                    /**
+                     * ### @@@@ START REPLACEMENT @@@@ ###
+                     * WHY: automated upgrade
+                     * OLD: NumericField::create (case sensitive)
+                     * NEW: NumericField::create (COMPLEX)
+                     * EXP: check the number of decimals required and add as ->setScale(2)
+                     * ### @@@@ STOP REPLACEMENT @@@@ ###
+                     */
                     NumericField::create('Serves', 'Serves')
                         ->setRightTitle('e.g. 4'),
                     TextField::create('ServesDescription', 'Serves Description')
@@ -243,25 +227,25 @@ class Recipe extends BlogPost
 
                     HeaderField::create('PrepTimeHeader', 'Time Required'),
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: NumericField::create (case sensitive)
-  * NEW: NumericField::create (COMPLEX)
-  * EXP: check the number of decimals required and add as ->setScale(2)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+                    /**
+                     * ### @@@@ START REPLACEMENT @@@@ ###
+                     * WHY: automated upgrade
+                     * OLD: NumericField::create (case sensitive)
+                     * NEW: NumericField::create (COMPLEX)
+                     * EXP: check the number of decimals required and add as ->setScale(2)
+                     * ### @@@@ STOP REPLACEMENT @@@@ ###
+                     */
                     NumericField::create('PrepTimeInMinutes', 'Prep Time in Minutes')
                         ->setRightTitle('e.g. 60'),
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: NumericField::create (case sensitive)
-  * NEW: NumericField::create (COMPLEX)
-  * EXP: check the number of decimals required and add as ->setScale(2)
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+                    /**
+                     * ### @@@@ START REPLACEMENT @@@@ ###
+                     * WHY: automated upgrade
+                     * OLD: NumericField::create (case sensitive)
+                     * NEW: NumericField::create (COMPLEX)
+                     * EXP: check the number of decimals required and add as ->setScale(2)
+                     * ### @@@@ STOP REPLACEMENT @@@@ ###
+                     */
                     NumericField::create('CookingTimeInMinutes', 'Cooking Time in Minutes')
                         ->setRightTitle('e.g. 20'),
 
@@ -296,7 +280,7 @@ class Recipe extends BlogPost
                         ->setRows(12)
                         ->setRightTitle('Separate each entry with a new line, no other formatting needed.'),
 
-                )
+                ]
             );
 
             if ($this->exists()) {
@@ -312,14 +296,14 @@ class Recipe extends BlogPost
 
                 $reviewFields = [];
 
-                if(!$this->FeaturedImage()->exists()){
+                if (! $this->FeaturedImage()->exists()) {
                     $reviewFields[] = LiteralField::create(
                         'FeaturedImageError',
                         '<p class="message error">A value for the <strong>Feature Image</strong> field is required.</p>'
                     );
                 }
 
-                if($this->Categories()->count() < 1){
+                if ($this->Categories()->count() < 1) {
                     $reviewFields[] = LiteralField::create(
                         'RecipeCategoryError',
                         '<p class="message warning">You have not added any <strong>Categories</strong> yet, pease add at least one category if possible.</p>'
@@ -327,7 +311,7 @@ class Recipe extends BlogPost
                 }
 
                 foreach ($dbFieldsToReview as $dbField => $label) {
-                    if(!$this->$dbField){
+                    if (! $this->{$dbField}) {
                         $reviewFields[] = LiteralField::create(
                             $dbField . 'Warning',
                             '<p class="message warning">The <strong>' . $label . '</strong> field is recommended. Please provide a value if available.</p>'
@@ -335,7 +319,7 @@ class Recipe extends BlogPost
                     }
                 }
 
-                if(count($reviewFields)){
+                if (count($reviewFields)) {
                     array_unshift($reviewFields, HeaderField::create('SEOReviewHeader', 'The following recomendations from schema.org can improve the SEO of this recipe.'));
                     $fields->addFieldsToTab(
                         'Root.SEO Review',
@@ -343,9 +327,9 @@ class Recipe extends BlogPost
                     );
                 }
             }
-        } else {
-            //do nothing
         }
+        //do nothing
+
         //remove old toggle field
 
         $fields->removeFieldFromTab('Root.Main', 'CustomSummary');
@@ -357,23 +341,22 @@ class Recipe extends BlogPost
             ->setDescription('Summarise the entry in around 30 words...');
         $fields->addFieldToTab('Root.Main', $summary, 'Content');
         $fields->addFieldsToTab(
-                'Root.Slideshow',
-                array(
-                    $uploadField2 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage2', $title = 'Featured Image 2', null, 'FeaturedImage'),
-                    $uploadField3 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage3', $title = 'Featured Image 3', null, 'FeaturedImage'),
-                    $uploadField4 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage4', $title = 'Featured Image 4', null, 'FeaturedImage'),
-                    $uploadField5 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage5', $title = 'Featured Image 5', null, 'FeaturedImage'),
-                )
-            );
-        $uploadField2->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
-        $uploadField3->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
-        $uploadField4->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
-        $uploadField5->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
-
+            'Root.Slideshow',
+            [
+                $uploadField2 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage2', $title = 'Featured Image 2', null, 'FeaturedImage'),
+                $uploadField3 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage3', $title = 'Featured Image 3', null, 'FeaturedImage'),
+                $uploadField4 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage4', $title = 'Featured Image 4', null, 'FeaturedImage'),
+                $uploadField5 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage5', $title = 'Featured Image 5', null, 'FeaturedImage'),
+            ]
+        );
+        $uploadField2->getValidator()->setAllowedExtensions(['jpg', 'jpeg', 'png', 'gif']);
+        $uploadField3->getValidator()->setAllowedExtensions(['jpg', 'jpeg', 'png', 'gif']);
+        $uploadField4->getValidator()->setAllowedExtensions(['jpg', 'jpeg', 'png', 'gif']);
+        $uploadField5->getValidator()->setAllowedExtensions(['jpg', 'jpeg', 'png', 'gif']);
 
         // replace standard FeaturedImage CMS field with PerfectCMSImagesUploadField
         $fields->removeByName('FeaturedImage');
-        $featuredImage =  PerfectCMSImagesUploadField::create(
+        $featuredImage = PerfectCMSImagesUploadField::create(
             $name = 'FeaturedImage',
             $title = 'Featured Image'
         )->setRightTitle('The main image for the blog entry.');
@@ -388,34 +371,32 @@ class Recipe extends BlogPost
 
         $fields->removeByName('Ratings');
         $fields->addFieldsToTab(
-                'Root.Images',
-                array(
-                    HeaderField::create("GalleryHeading", "Add a popup Gallery to your Blog Entry")
-                ),
-                'Images'
-            );
+            'Root.Images',
+            [
+                HeaderField::create('GalleryHeading', 'Add a popup Gallery to your Blog Entry'),
+            ],
+            'Images'
+        );
         $fields->fieldByName('Root.Images')->setTitle('Gallery');
         $fields->fieldByName('Root.Images.Images')->setRightTitle(
             'You can upload multiple images to this field at once.</br>
              To do this: click "From you computer", then select all the images you want to upload, then click open.</br>
              <strong>File size of each image uploaded needs to be less than 2MB.</strong>'
-            );
+        );
 
         $contentField = HTMLEditorField::create('Content', 'Content')->setRows(17);
 
-
-        if($this->IsRecipe()){
+        if ($this->IsRecipe()) {
             $contentField->setTitle('Directions')->setDescription('Make sure to only enter the directions for the recipe without any header. Ingredients can be added at the top of this tab and all the other details can be added in the RECIPE MORE DETAILS tab.');
             $fields->addFieldsToTab(
                 'Root.Main',
                 [
                     $contentField,
-                    YouTubeField::create('FeaturedVideo', 'YouTube link')->setRightTitle('The YouTube ID for the video, for example Hri1yBUR_CI. You can also paste the YouTube URL of the video.')
+                    YouTubeField::create('FeaturedVideo', 'YouTube link')->setRightTitle('The YouTube ID for the video, for example Hri1yBUR_CI. You can also paste the YouTube URL of the video.'),
                 ],
                 'UploadDirRulesNotes'
             );
-        }
-        else {
+        } else {
             $fields->addFieldToTab('Root.Main', $contentField, 'UploadDirRulesNotes');
             $fields->insertBefore(
                 'FeaturedImage',
@@ -460,9 +441,8 @@ class Recipe extends BlogPost
     {
         if ($this->Summary) {
             return $this->Summary;
-        } else {
-            return parent::Excerpt($wordsToDisplay);
         }
+        return parent::Excerpt($wordsToDisplay);
     }
 
     /**
@@ -498,39 +478,38 @@ class Recipe extends BlogPost
      */
     public function getIngredientList($number)
     {
-        if (!in_array($number, array(1,2,3,4,5))) {
+        if (! in_array($number, [1, 2, 3, 4, 5], true)) {
             user_error('need to set a number between 1 and 5.');
         }
         //remove white space
-        $field = 'Ingredients'.$number;
-        $fieldTitle = 'Ingredients'.$number.'Header';
-        $string =  trim($this->$field);
+        $field = 'Ingredients' . $number;
+        $fieldTitle = 'Ingredients' . $number . 'Header';
+        $string = trim($this->{$field});
         $array = explode("\n", $string);
         $al = ArrayList::create();
         foreach ($array as $item) {
             $item = trim($item);
             if ($item) {
-                $al->push(new ArrayData(array('Ingredient' => $item)));
+                $al->push(new ArrayData(['Ingredient' => $item]));
             }
         }
         $arrayData = ArrayData::create(
-            array(
-                'Title' => $this->$fieldTitle,
-                'Ingredients' => $al
-            )
+            [
+                'Title' => $this->{$fieldTitle},
+                'Ingredients' => $al,
+            ]
         );
 
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: ->RenderWith( (ignore case)
-  * NEW: ->RenderWith( (COMPLEX)
-  * EXP: Check that the template location is still valid!
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
+        /**
+         * ### @@@@ START REPLACEMENT @@@@ ###
+         * WHY: automated upgrade
+         * OLD: ->RenderWith( (ignore case)
+         * NEW: ->RenderWith( (COMPLEX)
+         * EXP: Check that the template location is still valid!
+         * ### @@@@ STOP REPLACEMENT @@@@ ###
+         */
         return $arrayData->RenderWith('ComputedIngredientList');
     }
-
 
     public function onAfterWrite()
     {
@@ -538,4 +517,3 @@ class Recipe extends BlogPost
         //parent::onAfterWrite();
     }
 }
-

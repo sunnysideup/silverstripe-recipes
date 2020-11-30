@@ -2,49 +2,33 @@
 
 namespace Sunnysideup\Recipes\Pages;
 
-
-
-
-
 use GridfieldConfig_RecordEditor;
 
-use GridFieldSortableRows;
 use GridFieldSendToBottomAction;
+use GridFieldSortableRows;
 
 
-use Sunnysideup\Recipes\Pages\Recipe;
 use SilverStripe\Blog\Model\Blog;
-use SilverStripe\Forms\Tab;
-use SilverStripe\Versioned\Versioned;
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
-use Sunnysideup\Recipes\Forms\GridField\GridFieldSiteTreeStateExtension;
-use SilverStripe\Forms\GridField\GridFieldPaginator;
-use SilverStripe\Forms\GridField\GridFieldDeleteAction;
-use SilverStripe\Blog\Model\BlogTag;
 use SilverStripe\Blog\Model\BlogCategory;
-
-
-
-/**
- *
- */
+use SilverStripe\Blog\Model\BlogTag;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
+use SilverStripe\Versioned\Versioned;
+use Sunnysideup\Recipes\Forms\GridField\GridFieldSiteTreeStateExtension;
 
 class RecipeHolder extends Blog
 {
-
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * OLD: private static $db (case sensitive)
-  * NEW: 
-    private static $table_name = '[SEARCH_REPLACE_CLASS_NAME_GOES_HERE]';
-
+    /**
+     * ### @@@@ START REPLACEMENT @@@@ ###
+     * OLD: private static $db (case sensitive)
+     * NEW:
     private static $db (COMPLEX)
-  * EXP: Check that is class indeed extends DataObject and that it is not a data-extension!
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
-    
+     * EXP: Check that is class indeed extends DataObject and that it is not a data-extension!
+     * ### @@@@ STOP REPLACEMENT @@@@ ###
+     */
     private static $table_name = 'RecipeHolder';
 
     private static $db = [
@@ -55,19 +39,21 @@ class RecipeHolder extends Blog
 
     private static $can_be_root = true;
 
-    private static $allowed_children = array(
-        Recipe::class
-    );
+    private static $allowed_children = [
+        Recipe::class,
+    ];
 
     private static $hide_ancestor = Blog::class;
 
     private static $singular_name = 'Recipe Holder Page';
+
+    private static $plural_name = 'Recipies Holder Pages';
+
     public function i18n_singular_name()
     {
         return self::$singular_name;
     }
 
-    private static $plural_name = 'Recipies Holder Pages';
     public function i18n_plural_name()
     {
         return self::$plural_name;
@@ -81,25 +67,25 @@ class RecipeHolder extends Blog
         $fields->insertBefore(new Tab('PublishedPosts', 'Published Posts'), 'Main');
 
         $publishedPosts = Versioned::get_by_stage(Recipe::class, 'Live')->filter(
-                [
-                    'ParentID' => $this->ID
-                ]
-            );
+            [
+                'ParentID' => $this->ID,
+            ]
+        );
 
         $fields->addFieldsToTab(
             'Root.PublishedPosts',
-            array(
+            [
                 GridField::create(
                     'PublishedBlogPosts',
                     'Published Blog Posts',
                     $publishedPosts,
                     $config = GridfieldConfig_RecordEditor::create()
-                )
-            )
+                ),
+            ]
         );
 
         $fieldToChange = $fields->fieldByName('Root.ChildPages.ChildPages');
-        if($fieldToChange) {
+        if ($fieldToChange) {
             $childPagesConfig = $fieldToChange->getConfig();
             $childPagesConfig->removeComponentsByType(GridFieldSiteTreeState::class)
                 ->addComponent(new GridFieldSiteTreeStateExtension())
@@ -109,10 +95,7 @@ class RecipeHolder extends Blog
 
             $paginator = $childPagesConfig->getComponentByType(GridFieldPaginator::class);
             $paginator->setItemsPerPage(200);
-
-
         }
-
 
         $config->removeComponentsByType(GridFieldDeleteAction::class);
 
@@ -175,4 +158,3 @@ class RecipeHolder extends Blog
         }
     }
 }
-

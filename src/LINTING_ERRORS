@@ -1,0 +1,185 @@
+
+
+---------------------------------
+  Running Easy Conding Standards
+---------------------------------
+  directory of script: /home/shane/.config/composer/vendor/bin
+  directory to analyse: /var/www/upgrades/recipes/recipes/src
+  also check (e.g. _config.php file): /var/www/upgrades/recipes/app/_config.php
+  ecs config file: /home/shane/.config/composer/vendor/bin/../sunnysideup/easy-coding-standards/ecs.yml
+---------------------------------
+
+
+EasyCodingStandard v6.1.0
+Config file: /home/shane/.config/composer/vendor/sunnysideup/easy-coding-standards/ecs.yml
+ 0/1 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%
+ 1/1 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ [OK] No errors found. Great job - your code is shiny in style!                                                         
+
+EasyCodingStandard v6.1.0
+Config file: /home/shane/.config/composer/vendor/sunnysideup/easy-coding-standards/ecs.yml
+ 0/5 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%
+ 2/5 [▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░]  40%
+ 5/5 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+
+1) recipes/src/Pages/RecipeHolder_Controller.php
+
+    ---------- begin diff ----------
+--- Original
++++ New
+@@ -63,14 +63,14 @@
+             [
+                 'PaginatedRecipes' => $this->PaginatedRecipes,
+             ]
+-        /**
+-         * ### @@@@ START REPLACEMENT @@@@ ###
+-         * WHY: automated upgrade
+-         * OLD: ->RenderWith( (ignore case)
+-         * NEW: ->RenderWith( (COMPLEX)
+-         * EXP: Check that the template location is still valid!
+-         * ### @@@@ STOP REPLACEMENT @@@@ ###
+-         */
++            /**
++            * ### @@@@ START REPLACEMENT @@@@ ###
++            * WHY: automated upgrade
++            * OLD: ->RenderWith( (ignore case)
++            * NEW: ->RenderWith( (COMPLEX)
++            * EXP: Check that the template location is still valid!
++            * ### @@@@ STOP REPLACEMENT @@@@ ###
++            */
+         )->RenderWith('RecipeHolder_Ajax');
+     }
+ 
+
+    ----------- end diff -----------
+
+Applied checkers:
+
+ * PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff.Indent
+ * PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose
+
+
+    ---------- begin diff ----------
+--- Original
++++ New
+@@ -63,14 +63,14 @@
+             [
+                 'PaginatedRecipes' => $this->PaginatedRecipes,
+             ]
+-            /**
+-            * ### @@@@ START REPLACEMENT @@@@ ###
+-            * WHY: automated upgrade
+-            * OLD: ->RenderWith( (ignore case)
+-            * NEW: ->RenderWith( (COMPLEX)
+-            * EXP: Check that the template location is still valid!
+-            * ### @@@@ STOP REPLACEMENT @@@@ ###
+-            */
++        /**
++         * ### @@@@ START REPLACEMENT @@@@ ###
++         * WHY: automated upgrade
++         * OLD: ->RenderWith( (ignore case)
++         * NEW: ->RenderWith( (COMPLEX)
++         * EXP: Check that the template location is still valid!
++         * ### @@@@ STOP REPLACEMENT @@@@ ###
++         */
+         )->RenderWith('RecipeHolder_Ajax');
+     }
+ 
+
+    ----------- end diff -----------
+
+Applied checkers:
+
+ * PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer
+
+
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ recipes/src/Pages/RecipeHolder_Controller.php:9
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Class name "RecipeHolder_Controller" is not in PascalCase format
+ (PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ValidClassNameSniff.NotCamelCaps)
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ recipes/src/Pages/Recipe_Controller.php:8
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Class name "Recipe_Controller" is not in PascalCase format
+ (PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ValidClassNameSniff.NotCamelCaps)
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ [ERROR] Found 2 errors that needs to be fixed manually.                                                                
+
+
+
+---------------------------------
+  Running PHP STAN
+---------------------------------
+  directory of script: /home/shane/.config/composer/vendor/bin
+  directory to analyse: /var/www/upgrades/recipes/recipes/src
+  also check (e.g. _config.php file): /var/www/upgrades/recipes/app/_config.php
+  level: 4 (1/6)
+  php stan config file: /home/shane/.config/composer/vendor/bin/../sunnysideup/easy-coding-standards/phpstan.neon
+---------------------------------
+
+
+ 0/1 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%[2K 1/1 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ [OK] No errors                                                                                                         
+
+ 0/5 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%[2K 2/5 [▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░]  40%PHP Warning:  Declaration of Sunnysideup\Recipes\Pages\RecipeHolder_Controller::index() should be compatible with SilverStripe\Blog\Model\BlogController::index(SilverStripe\Control\HTTPRequest $request) in /var/www/upgrades/recipes/recipes/src/Pages/RecipeHolder_Controller.php on line 129
+[2K 3/5 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░]  60%[2K 4/5 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░]  80%[2K 5/5 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   Pages/Recipe.php                                                                                                                                              
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  89     Static property Sunnysideup\Recipes\Pages\Recipe::$defaults (bool) does not accept default value of type array<string, string>.                               
+  427    Call to an undefined static method SilverStripe\Blog\Model\BlogPost::onAfterUnpublish().                                                                      
+  452    Return typehint of method Sunnysideup\Recipes\Pages\Recipe::MyCategories() has invalid type Sunnysideup\Recipes\Pages\DataList.                               
+  462    Class PicsBlogRecipes not found.                                                                                                                              
+  462    Left side of && is always true.                                                                                                                               
+  470    Return typehint of method Sunnysideup\Recipes\Pages\Recipe::IngredientList() has invalid type Sunnysideup\Recipes\Pages\html.                                 
+  479    Return typehint of method Sunnysideup\Recipes\Pages\Recipe::getIngredientList() has invalid type Sunnysideup\Recipes\Pages\html.                              
+  511    Method Sunnysideup\Recipes\Pages\Recipe::getIngredientList() should return Sunnysideup\Recipes\Pages\html but returns SilverStripe\ORM\FieldType\DBHTMLText.  
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   Pages/RecipeHolder.php                                                                                                                                  
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  88     If condition is always true.                                                                                                                            
+  92     Instantiated class GridFieldSortableRows not found.                                                                                                     
+  93     Instantiated class GridFieldSendToBottomAction not found.                                                                                               
+  111    Return typehint of method Sunnysideup\Recipes\Pages\RecipeHolder::Tags() has invalid type Sunnysideup\Recipes\Pages\DataList.                           
+  113    Method Sunnysideup\Recipes\Pages\RecipeHolder::Tags() should return Sunnysideup\Recipes\Pages\DataList but returns SilverStripe\ORM\DataList.           
+  122    Return typehint of method Sunnysideup\Recipes\Pages\RecipeHolder::Categories() has invalid type Sunnysideup\Recipes\Pages\DataList.                     
+  124    Method Sunnysideup\Recipes\Pages\RecipeHolder::Categories() should return Sunnysideup\Recipes\Pages\DataList but returns SilverStripe\ORM\DataList.     
+  133    Return typehint of method Sunnysideup\Recipes\Pages\RecipeHolder::getTags() has invalid type Sunnysideup\Recipes\Pages\DataList.                        
+  135    Method Sunnysideup\Recipes\Pages\RecipeHolder::getTags() should return Sunnysideup\Recipes\Pages\DataList but returns SilverStripe\ORM\DataList.        
+  144    Return typehint of method Sunnysideup\Recipes\Pages\RecipeHolder::getCategories() has invalid type Sunnysideup\Recipes\Pages\DataList.                  
+  146    Method Sunnysideup\Recipes\Pages\RecipeHolder::getCategories() should return Sunnysideup\Recipes\Pages\DataList but returns SilverStripe\ORM\DataList.  
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   Pages/RecipeHolder_Controller.php                                                                                                                      
+ ------ ------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  22     Method SilverStripe\Blog\Model\BlogController::index() invoked with 0 parameters, 1 required.                                                          
+  50     Return typehint of method Sunnysideup\Recipes\Pages\RecipeHolder_Controller::tag() has invalid type Sunnysideup\Recipes\Pages\SS_HTTPResponse.         
+  57     Method Sunnysideup\Recipes\Pages\RecipeHolder_Controller::tag() should return Sunnysideup\Recipes\Pages\SS_HTTPResponse|null but returns string|null.  
+  79     Ternary operator condition is always true.                                                                                                             
+ ------ ------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ ------ ------------------------------ 
+  Line   Pages/Recipe_Controller.php   
+ ------ ------------------------------ 
+  87     If condition is always true.  
+ ------ ------------------------------ 
+
+ ---------------------------------------------------------------------------------- 
+  Error                                                                             
+ ---------------------------------------------------------------------------------- 
+  Ignored error pattern #with incorrect case:# was not matched in reported errors.  
+ ---------------------------------------------------------------------------------- 
+
+ [ERROR] Found 25 errors                                                                                                
+
