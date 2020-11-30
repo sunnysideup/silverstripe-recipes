@@ -73,11 +73,56 @@ class Recipe extends BlogPost
      * @var array
      */
     private static $has_one = [
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD:  => 'Image' (case sensitive)
+  * NEW:  => 'Image' (COMPLEX)
+  * EXP: you may want to add ownership (owns)
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
         'GrandFeaturedHomePageImage' => 'Image',
         'RecipePDF' => 'File',
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD:  => 'Image' (case sensitive)
+  * NEW:  => 'Image' (COMPLEX)
+  * EXP: you may want to add ownership (owns)
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
         'FeaturedImage2' => 'Image',
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD:  => 'Image' (case sensitive)
+  * NEW:  => 'Image' (COMPLEX)
+  * EXP: you may want to add ownership (owns)
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
         'FeaturedImage3' => 'Image',
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD:  => 'Image' (case sensitive)
+  * NEW:  => 'Image' (COMPLEX)
+  * EXP: you may want to add ownership (owns)
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
         'FeaturedImage4' => 'Image',
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD:  => 'Image' (case sensitive)
+  * NEW:  => 'Image' (COMPLEX)
+  * EXP: you may want to add ownership (owns)
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
         'FeaturedImage5' => 'Image',
         'RecommendedProduct1' => 'FeaturedProductImage',
         'RecommendedProduct2' => 'FeaturedProductImage',
@@ -140,14 +185,41 @@ class Recipe extends BlogPost
                     TextField::create('RecipeContributorLink', 'Recipe Contributor Link'),
 
                     HeaderField::create('ServesHeader', 'Servings'),
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD: NumericField::create (case sensitive)
+  * NEW: NumericField::create (COMPLEX)
+  * EXP: check the number of decimals required and add as ->setScale(2)
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
                     NumericField::create('Serves', 'Serves')
                         ->setRightTitle('e.g. 4'),
                     TextField::create('ServesDescription', 'Serves Description')
                         ->setRightTitle('optional ... e.g. entree sized servings, serves four children, etc.... '),
 
                     HeaderField::create('PrepTimeHeader', 'Time Required'),
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD: NumericField::create (case sensitive)
+  * NEW: NumericField::create (COMPLEX)
+  * EXP: check the number of decimals required and add as ->setScale(2)
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
                     NumericField::create('PrepTimeInMinutes', 'Prep Time in Minutes')
                         ->setRightTitle('e.g. 60'),
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD: NumericField::create (case sensitive)
+  * NEW: NumericField::create (COMPLEX)
+  * EXP: check the number of decimals required and add as ->setScale(2)
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
                     NumericField::create('CookingTimeInMinutes', 'Cooking Time in Minutes')
                         ->setRightTitle('e.g. 20'),
 
@@ -405,7 +477,16 @@ class Recipe extends BlogPost
                 'Ingredients' => $al
             )
         );
-        return $arrayData->renderWith('ComputedIngredientList');
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD: ->RenderWith( (ignore case)
+  * NEW: ->RenderWith( (COMPLEX)
+  * EXP: Check that the template location is still valid!
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
+        return $arrayData->RenderWith('ComputedIngredientList');
     }
 
 

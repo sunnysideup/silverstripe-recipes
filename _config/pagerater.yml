@@ -4,5 +4,5 @@ PageRaterStarField:
   allow_title: true
 
 
-PageRaterExtension_Controller:
+PageRaterExtensionController:
   only_show_approved: true

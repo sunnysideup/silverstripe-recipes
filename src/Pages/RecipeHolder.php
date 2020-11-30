@@ -140,7 +140,7 @@ class RecipeHolder extends Blog
     public function onAfterWrite()
     {
         parent::onAfterWrite();
-        $validIDs = array();
+        $validIDs = [];
         $blogs = Blog::get();
         foreach ($blogs as $blog) {
             if ($blog->isPublished()) {

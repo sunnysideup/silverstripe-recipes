@@ -10,7 +10,7 @@ class Recipe_Controller extends BlogPost_Controller
     public function RelatedPosts()
     {
         $al = ArrayList::create();
-        $mustHaveIDs = array();
+        $mustHaveIDs = [];
         if ($this->IsRecipe()) {
             foreach ($this->Tags() as $tag) {
                 $posts = $tag->BlogPosts()->exclude(array('ID' => $this->ID));

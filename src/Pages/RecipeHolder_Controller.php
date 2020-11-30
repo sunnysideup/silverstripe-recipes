@@ -92,7 +92,16 @@ class RecipeHolder_Controller extends Blog_Controller
             [
                 'PaginatedRecipes' => $this->PaginatedRecipes
             ]
-        )->renderWith('RecipeHolder_Ajax');
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD: ->RenderWith( (ignore case)
+  * NEW: ->RenderWith( (COMPLEX)
+  * EXP: Check that the template location is still valid!
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
+        )->RenderWith('RecipeHolder_Ajax');
     }
 
     public function PaginatedRecipes(){
