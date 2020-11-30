@@ -2,8 +2,13 @@
 
 namespace Sunnysideup\Recipes\Forms\GridField;
 
-use GridFieldSiteTreeState;
-use DBField;
+
+
+use SilverStripe\Assets\Image;
+use SilverStripe\ORM\FieldType\DBDatetime;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
+
 
 
 class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
@@ -59,7 +64,7 @@ class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
   * EXP: you may want to add ownership (owns)
   * ### @@@@ STOP REPLACEMENT @@@@ ###
   */
-                    "title" => 'Image'
+                    "title" => Image::class
                 ];
             case 'Created':
                 return [
@@ -88,7 +93,7 @@ class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
             }
             return $record->FeaturedImage()->CMSThumbnail();
         } elseif ($columnName == "Created") {
-            return DBField::create_field('SS_Datetime', $record->Created)->Ago();
+            return DBField::create_field(DBDatetime::class, $record->Created)->Ago();
         } elseif ($columnName == "Categories") {
             $array = [];
             foreach($record->Categories() as $tag) {

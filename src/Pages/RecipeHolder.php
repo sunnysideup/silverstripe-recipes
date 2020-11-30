@@ -2,16 +2,28 @@
 
 namespace Sunnysideup\Recipes\Pages;
 
-use Blog;
-use Tab;
-use Versioned;
-use GridField;
+
+
+
+
 use GridfieldConfig_RecordEditor;
-use GridFieldSiteTreeStateExtension;
+
 use GridFieldSortableRows;
 use GridFieldSendToBottomAction;
-use BlogTag;
-use BlogCategory;
+
+
+use Sunnysideup\Recipes\Pages\Recipe;
+use SilverStripe\Blog\Model\Blog;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
+use Sunnysideup\Recipes\Forms\GridField\GridFieldSiteTreeStateExtension;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Blog\Model\BlogTag;
+use SilverStripe\Blog\Model\BlogCategory;
+
 
 
 /**
@@ -44,10 +56,10 @@ class RecipeHolder extends Blog
     private static $can_be_root = true;
 
     private static $allowed_children = array(
-        'Recipe'
+        Recipe::class
     );
 
-    private static $hide_ancestor = "Blog";
+    private static $hide_ancestor = Blog::class;
 
     private static $singular_name = 'Recipe Holder Page';
     public function i18n_singular_name()
@@ -68,7 +80,7 @@ class RecipeHolder extends Blog
 
         $fields->insertBefore(new Tab('PublishedPosts', 'Published Posts'), 'Main');
 
-        $publishedPosts = Versioned::get_by_stage('Recipe', 'Live')->filter(
+        $publishedPosts = Versioned::get_by_stage(Recipe::class, 'Live')->filter(
                 [
                     'ParentID' => $this->ID
                 ]
@@ -89,20 +101,20 @@ class RecipeHolder extends Blog
         $fieldToChange = $fields->fieldByName('Root.ChildPages.ChildPages');
         if($fieldToChange) {
             $childPagesConfig = $fieldToChange->getConfig();
-            $childPagesConfig->removeComponentsByType('GridFieldSiteTreeState')
+            $childPagesConfig->removeComponentsByType(GridFieldSiteTreeState::class)
                 ->addComponent(new GridFieldSiteTreeStateExtension())
                 ->addComponent($sortable = new GridFieldSortableRows('Sort'))
                 ->addComponent(new GridFieldSendToBottomAction('Sort', 'Live'));
             $sortable->setUpdateVersionedStage('Live');
 
-            $paginator = $childPagesConfig->getComponentByType('GridFieldPaginator');
+            $paginator = $childPagesConfig->getComponentByType(GridFieldPaginator::class);
             $paginator->setItemsPerPage(200);
 
 
         }
 
 
-        $config->removeComponentsByType('GridFieldDeleteAction');
+        $config->removeComponentsByType(GridFieldDeleteAction::class);
 
         return $fields;
     }

@@ -14,11 +14,7 @@ PicsBlogEntry:
     html_allowed: false
   extensions:
     - CommentsExtension
-
-BlogPost:
+SilverStripe\Blog\Model\BlogPost:
   can_create: false
-
 BlogPostSharedCategoriesExtension:
   tags_checkboxes: false
-
-PicsBlogEntry:

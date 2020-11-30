@@ -1,0 +1,364 @@
+2020-11-30 03:42
+
+# running php upgrade upgrade see: https://github.com/silverstripe/silverstripe-upgrader
+cd /var/www/upgrades/recipes
+php /var/www/upgrades/upgrader_tool/vendor/silverstripe/upgrader/bin/upgrade-code upgrade /var/www/upgrades/recipes/recipes  --root-dir=/var/www/upgrades/recipes --write -vvv
+Writing changes for 7 files
+Running upgrades on "/var/www/upgrades/recipes/recipes"
+[2020-11-30 15:42:21] Applying RenameClasses to _config.php...
+[2020-11-30 15:42:21] Applying ClassToTraitRule to _config.php...
+[2020-11-30 15:42:21] Applying UpdateConfigClasses to config.yml...
+PHP Warning:  Invalid argument supplied for foreach() in /var/www/upgrades/upgrader_tool/vendor/silverstripe/upgrader/src/UpgradeRule/YML/YMLUpgradeRule.php on line 32
+[2020-11-30 15:42:21] Applying UpdateConfigClasses to comments.yml...
+[2020-11-30 15:42:21] Applying UpdateConfigClasses to gallery.yml...
+[2020-11-30 15:42:21] Applying UpdateConfigClasses to pagerater.yml...
+[2020-11-30 15:42:21] Applying RenameClasses to GridFieldSiteTreeStateExtension.php...
+[2020-11-30 15:42:21] Applying ClassToTraitRule to GridFieldSiteTreeStateExtension.php...
+[2020-11-30 15:42:21] Applying RenameClasses to Recipe_Controller.php...
+[2020-11-30 15:42:21] Applying ClassToTraitRule to Recipe_Controller.php...
+[2020-11-30 15:42:21] Applying RenameClasses to RecipeHolder_Controller.php...
+[2020-11-30 15:42:21] Applying ClassToTraitRule to RecipeHolder_Controller.php...
+[2020-11-30 15:42:21] Applying RenameClasses to Recipe.php...
+[2020-11-30 15:42:21] Applying ClassToTraitRule to Recipe.php...
+[2020-11-30 15:42:21] Applying RenameClasses to RecipeHolder.php...
+[2020-11-30 15:42:21] Applying ClassToTraitRule to RecipeHolder.php...
+modified:	_config/config.yml
+@@ -3,4 +3,4 @@
+ After:
+   - '#coreconfig'
+ ---
+-
++{  }
+
+modified:	_config/comments.yml
+@@ -14,12 +14,8 @@
+     html_allowed: false
+   extensions:
+     - CommentsExtension
+-
+-BlogPost:
++SilverStripe\Blog\Model\BlogPost:
+   can_create: false
+-
+ BlogPostSharedCategoriesExtension:
+   tags_checkboxes: false
+
+-PicsBlogEntry:
+-
+
+modified:	src/Forms/GridField/GridFieldSiteTreeStateExtension.php
+@@ -2,8 +2,13 @@
+
+ namespace Sunnysideup\Recipes\Forms\GridField;
+
+-use GridFieldSiteTreeState;
+-use DBField;
++
++
++use SilverStripe\Assets\Image;
++use SilverStripe\ORM\FieldType\DBDatetime;
++use SilverStripe\ORM\FieldType\DBField;
++use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
++
+
+
+ class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
+@@ -59,7 +64,7 @@
+   * EXP: you may want to add ownership (owns)
+   * ### @@@@ STOP REPLACEMENT @@@@ ###
+   */
+-                    "title" => 'Image'
++                    "title" => Image::class
+                 ];
+             case 'Created':
+                 return [
+@@ -88,7 +93,7 @@
+             }
+             return $record->FeaturedImage()->CMSThumbnail();
+         } elseif ($columnName == "Created") {
+-            return DBField::create_field('SS_Datetime', $record->Created)->Ago();
++            return DBField::create_field(DBDatetime::class, $record->Created)->Ago();
+         } elseif ($columnName == "Categories") {
+             $array = [];
+             foreach($record->Categories() as $tag) {
+
+Warnings for src/Forms/GridField/GridFieldSiteTreeStateExtension.php:
+ - src/Forms/GridField/GridFieldSiteTreeStateExtension.php:62 Renaming ambiguous string Image to SilverStripe\Assets\Image
+
+modified:	src/Pages/Recipe_Controller.php
+@@ -2,11 +2,14 @@
+
+ namespace Sunnysideup\Recipes\Pages;
+
+-use BlogPost_Controller;
+-use ArrayList;
+
+
+-class Recipe_Controller extends BlogPost_Controller
++use SilverStripe\ORM\ArrayList;
++use SilverStripe\Blog\Model\BlogPostController;
++
++
++
++class Recipe_Controller extends BlogPostController
+ {
+
+     /**
+
+modified:	src/Pages/RecipeHolder_Controller.php
+@@ -2,12 +2,16 @@
+
+ namespace Sunnysideup\Recipes\Pages;
+
+-use Blog_Controller;
+-use ArrayList;
+-use PaginatedList;
+
+
+-class RecipeHolder_Controller extends Blog_Controller
++
++use SilverStripe\ORM\ArrayList;
++use SilverStripe\ORM\PaginatedList;
++use SilverStripe\Blog\Model\BlogController;
++
++
++
++class RecipeHolder_Controller extends BlogController
+ {
+
+
+
+modified:	src/Pages/Recipe.php
+@@ -2,25 +2,44 @@
+
+ namespace Sunnysideup\Recipes\Pages;
+
+-use BlogPost;
+-use Tab;
+-use HeaderField;
+-use TextField;
+-use TextareaField;
+-use DropdownField;
++
++
++
++
++
++
+ use FeaturedProductImage;
+-use NumericField;
+-use PDFUploadField;
+-use LiteralField;
+-use HTMLEditorField;
++
++
++
++
+ use PerfectCMSImagesUploadField;
+-use CheckboxField;
++
+ use YouTubeField;
+ use GridFieldSendToBottomAction;
+-use BlogCategory;
++
+ use PicsBlogRecipes;
+-use ArrayList;
+-use ArrayData;
++
++
++use SilverStripe\Blog\Model\BlogPost;
++use SilverStripe\Assets\Image;
++use SilverStripe\Assets\File;
++use SilverStripe\Forms\Tab;
++use Sunnysideup\Recipes\Pages\Recipe;
++use SilverStripe\Forms\HeaderField;
++use SilverStripe\Forms\TextField;
++use SilverStripe\Forms\TextareaField;
++use SilverStripe\Forms\DropdownField;
++use SilverStripe\Forms\NumericField;
++use Sunnysideup\PdfUpload\Forms\PDFUploadField;
++use SilverStripe\Forms\LiteralField;
++use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
++use SilverStripe\Forms\CheckboxField;
++use SilverStripe\CMS\Model\SiteTree;
++use SilverStripe\Blog\Model\BlogCategory;
++use SilverStripe\ORM\ArrayList;
++use SilverStripe\View\ArrayData;
++
+
+
+ /**
+@@ -31,7 +50,7 @@
+ {
+     private static $can_create = true;
+
+-    private static $hide_ancestor = 'BlogPost';
++    private static $hide_ancestor = BlogPost::class;
+
+
+
+@@ -105,8 +124,8 @@
+   * EXP: you may want to add ownership (owns)
+   * ### @@@@ STOP REPLACEMENT @@@@ ###
+   */
+-        'GrandFeaturedHomePageImage' => 'Image',
+-        'RecipePDF' => 'File',
++        'GrandFeaturedHomePageImage' => Image::class,
++        'RecipePDF' => File::class,
+
+ /**
+   * ### @@@@ START REPLACEMENT @@@@ ###
+@@ -116,7 +135,7 @@
+   * EXP: you may want to add ownership (owns)
+   * ### @@@@ STOP REPLACEMENT @@@@ ###
+   */
+-        'FeaturedImage2' => 'Image',
++        'FeaturedImage2' => Image::class,
+
+ /**
+   * ### @@@@ START REPLACEMENT @@@@ ###
+@@ -126,7 +145,7 @@
+   * EXP: you may want to add ownership (owns)
+   * ### @@@@ STOP REPLACEMENT @@@@ ###
+   */
+-        'FeaturedImage3' => 'Image',
++        'FeaturedImage3' => Image::class,
+
+ /**
+   * ### @@@@ START REPLACEMENT @@@@ ###
+@@ -136,7 +155,7 @@
+   * EXP: you may want to add ownership (owns)
+   * ### @@@@ STOP REPLACEMENT @@@@ ###
+   */
+-        'FeaturedImage4' => 'Image',
++        'FeaturedImage4' => Image::class,
+
+ /**
+   * ### @@@@ START REPLACEMENT @@@@ ###
+@@ -146,7 +165,7 @@
+   * EXP: you may want to add ownership (owns)
+   * ### @@@@ STOP REPLACEMENT @@@@ ###
+   */
+-        'FeaturedImage5' => 'Image',
++        'FeaturedImage5' => Image::class,
+         'RecommendedProduct1' => 'FeaturedProductImage',
+         'RecommendedProduct2' => 'FeaturedProductImage',
+         'RecommendedProduct3' => 'FeaturedProductImage'
+@@ -171,7 +190,7 @@
+             $fields->addFieldsToTab(
+                 'Root.Main',
+                 [
+-                    HeaderField::create('RecipeHeader', 'Recipe'),
++                    HeaderField::create('RecipeHeader', Recipe::class),
+                     TextField::create('CuisineType', 'Cuisine Type')->setRightTitle('The cuisine of the recipe (eg, French or Ethiopian)'),
+                     TextField::create('Ingredients1Header', 'Ingredients Header')
+                         ->setRightTitle('Usually this is simply ingredients, but if you like to enter more than one list then you can call it, for example, ingredients for filling, bun, or sauce - to distinguish it from the second ingredient list.'),
+@@ -426,7 +445,7 @@
+     {
+         parent::onAfterUnpublish();
+         if ($this->IsRecipe()) {
+-            GridFieldSendToBottomAction::sendToBottomOfList('SiteTree', 'Sort', $this->ID);
++            GridFieldSendToBottomAction::sendToBottomOfList(SiteTree::class, 'Sort', $this->ID);
+         }
+     }
+
+
+Warnings for src/Pages/Recipe.php:
+ - src/Pages/Recipe.php:108 Renaming ambiguous string Image to SilverStripe\Assets\Image
+
+ - src/Pages/Recipe.php:109 Renaming ambiguous string File to SilverStripe\Assets\File
+
+ - src/Pages/Recipe.php:119 Renaming ambiguous string Image to SilverStripe\Assets\Image
+
+ - src/Pages/Recipe.php:129 Renaming ambiguous string Image to SilverStripe\Assets\Image
+
+ - src/Pages/Recipe.php:139 Renaming ambiguous string Image to SilverStripe\Assets\Image
+
+ - src/Pages/Recipe.php:149 Renaming ambiguous string Image to SilverStripe\Assets\Image
+
+modified:	src/Pages/RecipeHolder.php
+@@ -2,16 +2,28 @@
+
+ namespace Sunnysideup\Recipes\Pages;
+
+-use Blog;
+-use Tab;
+-use Versioned;
+-use GridField;
++
++
++
++
+ use GridfieldConfig_RecordEditor;
+-use GridFieldSiteTreeStateExtension;
++
+ use GridFieldSortableRows;
+ use GridFieldSendToBottomAction;
+-use BlogTag;
+-use BlogCategory;
++
++
++use Sunnysideup\Recipes\Pages\Recipe;
++use SilverStripe\Blog\Model\Blog;
++use SilverStripe\Forms\Tab;
++use SilverStripe\Versioned\Versioned;
++use SilverStripe\Forms\GridField\GridField;
++use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
++use Sunnysideup\Recipes\Forms\GridField\GridFieldSiteTreeStateExtension;
++use SilverStripe\Forms\GridField\GridFieldPaginator;
++use SilverStripe\Forms\GridField\GridFieldDeleteAction;
++use SilverStripe\Blog\Model\BlogTag;
++use SilverStripe\Blog\Model\BlogCategory;
++
+
+
+ /**
+@@ -44,10 +56,10 @@
+     private static $can_be_root = true;
+
+     private static $allowed_children = array(
+-        'Recipe'
++        Recipe::class
+     );
+
+-    private static $hide_ancestor = "Blog";
++    private static $hide_ancestor = Blog::class;
+
+     private static $singular_name = 'Recipe Holder Page';
+     public function i18n_singular_name()
+@@ -68,7 +80,7 @@
+
+         $fields->insertBefore(new Tab('PublishedPosts', 'Published Posts'), 'Main');
+
+-        $publishedPosts = Versioned::get_by_stage('Recipe', 'Live')->filter(
++        $publishedPosts = Versioned::get_by_stage(Recipe::class, 'Live')->filter(
+                 [
+                     'ParentID' => $this->ID
+                 ]
+@@ -89,20 +101,20 @@
+         $fieldToChange = $fields->fieldByName('Root.ChildPages.ChildPages');
+         if($fieldToChange) {
+             $childPagesConfig = $fieldToChange->getConfig();
+-            $childPagesConfig->removeComponentsByType('GridFieldSiteTreeState')
++            $childPagesConfig->removeComponentsByType(GridFieldSiteTreeState::class)
+                 ->addComponent(new GridFieldSiteTreeStateExtension())
+                 ->addComponent($sortable = new GridFieldSortableRows('Sort'))
+                 ->addComponent(new GridFieldSendToBottomAction('Sort', 'Live'));
+             $sortable->setUpdateVersionedStage('Live');
+
+-            $paginator = $childPagesConfig->getComponentByType('GridFieldPaginator');
++            $paginator = $childPagesConfig->getComponentByType(GridFieldPaginator::class);
+             $paginator->setItemsPerPage(200);
+
+
+         }
+
+
+-        $config->removeComponentsByType('GridFieldDeleteAction');
++        $config->removeComponentsByType(GridFieldDeleteAction::class);
+
+         return $fields;
+     }
+
+Writing changes for 7 files
+✔✔✔

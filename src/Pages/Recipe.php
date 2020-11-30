@@ -2,25 +2,44 @@
 
 namespace Sunnysideup\Recipes\Pages;
 
-use BlogPost;
-use Tab;
-use HeaderField;
-use TextField;
-use TextareaField;
-use DropdownField;
+
+
+
+
+
+
 use FeaturedProductImage;
-use NumericField;
-use PDFUploadField;
-use LiteralField;
-use HTMLEditorField;
+
+
+
+
 use PerfectCMSImagesUploadField;
-use CheckboxField;
+
 use YouTubeField;
 use GridFieldSendToBottomAction;
-use BlogCategory;
+
 use PicsBlogRecipes;
-use ArrayList;
-use ArrayData;
+
+
+use SilverStripe\Blog\Model\BlogPost;
+use SilverStripe\Assets\Image;
+use SilverStripe\Assets\File;
+use SilverStripe\Forms\Tab;
+use Sunnysideup\Recipes\Pages\Recipe;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\NumericField;
+use Sunnysideup\PdfUpload\Forms\PDFUploadField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Blog\Model\BlogCategory;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\View\ArrayData;
+
 
 
 /**
@@ -31,7 +50,7 @@ class Recipe extends BlogPost
 {
     private static $can_create = true;
 
-    private static $hide_ancestor = 'BlogPost';
+    private static $hide_ancestor = BlogPost::class;
 
 
 
@@ -105,8 +124,8 @@ class Recipe extends BlogPost
   * EXP: you may want to add ownership (owns)
   * ### @@@@ STOP REPLACEMENT @@@@ ###
   */
-        'GrandFeaturedHomePageImage' => 'Image',
-        'RecipePDF' => 'File',
+        'GrandFeaturedHomePageImage' => Image::class,
+        'RecipePDF' => File::class,
 
 /**
   * ### @@@@ START REPLACEMENT @@@@ ###
@@ -116,7 +135,7 @@ class Recipe extends BlogPost
   * EXP: you may want to add ownership (owns)
   * ### @@@@ STOP REPLACEMENT @@@@ ###
   */
-        'FeaturedImage2' => 'Image',
+        'FeaturedImage2' => Image::class,
 
 /**
   * ### @@@@ START REPLACEMENT @@@@ ###
@@ -126,7 +145,7 @@ class Recipe extends BlogPost
   * EXP: you may want to add ownership (owns)
   * ### @@@@ STOP REPLACEMENT @@@@ ###
   */
-        'FeaturedImage3' => 'Image',
+        'FeaturedImage3' => Image::class,
 
 /**
   * ### @@@@ START REPLACEMENT @@@@ ###
@@ -136,7 +155,7 @@ class Recipe extends BlogPost
   * EXP: you may want to add ownership (owns)
   * ### @@@@ STOP REPLACEMENT @@@@ ###
   */
-        'FeaturedImage4' => 'Image',
+        'FeaturedImage4' => Image::class,
 
 /**
   * ### @@@@ START REPLACEMENT @@@@ ###
@@ -146,7 +165,7 @@ class Recipe extends BlogPost
   * EXP: you may want to add ownership (owns)
   * ### @@@@ STOP REPLACEMENT @@@@ ###
   */
-        'FeaturedImage5' => 'Image',
+        'FeaturedImage5' => Image::class,
         'RecommendedProduct1' => 'FeaturedProductImage',
         'RecommendedProduct2' => 'FeaturedProductImage',
         'RecommendedProduct3' => 'FeaturedProductImage'
@@ -171,7 +190,7 @@ class Recipe extends BlogPost
             $fields->addFieldsToTab(
                 'Root.Main',
                 [
-                    HeaderField::create('RecipeHeader', 'Recipe'),
+                    HeaderField::create('RecipeHeader', Recipe::class),
                     TextField::create('CuisineType', 'Cuisine Type')->setRightTitle('The cuisine of the recipe (eg, French or Ethiopian)'),
                     TextField::create('Ingredients1Header', 'Ingredients Header')
                         ->setRightTitle('Usually this is simply ingredients, but if you like to enter more than one list then you can call it, for example, ingredients for filling, bun, or sauce - to distinguish it from the second ingredient list.'),
@@ -426,7 +445,7 @@ class Recipe extends BlogPost
     {
         parent::onAfterUnpublish();
         if ($this->IsRecipe()) {
-            GridFieldSendToBottomAction::sendToBottomOfList('SiteTree', 'Sort', $this->ID);
+            GridFieldSendToBottomAction::sendToBottomOfList(SiteTree::class, 'Sort', $this->ID);
         }
     }
 

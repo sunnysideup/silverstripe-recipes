@@ -2,11 +2,14 @@
 
 namespace Sunnysideup\Recipes\Pages;
 
-use BlogPost_Controller;
-use ArrayList;
 
 
-class Recipe_Controller extends BlogPost_Controller
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Blog\Model\BlogPostController;
+
+
+
+class Recipe_Controller extends BlogPostController
 {
 
     /**

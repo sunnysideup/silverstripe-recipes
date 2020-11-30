@@ -2,12 +2,16 @@
 
 namespace Sunnysideup\Recipes\Pages;
 
-use Blog_Controller;
-use ArrayList;
-use PaginatedList;
 
 
-class RecipeHolder_Controller extends Blog_Controller
+
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\PaginatedList;
+use SilverStripe\Blog\Model\BlogController;
+
+
+
+class RecipeHolder_Controller extends BlogController
 {
 
 
