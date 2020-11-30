@@ -33,3 +33,36 @@ Warnings for Pages/Recipe.php:
  - Pages/Recipe.php:429 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
 Writing changes for 0 files
 ✔✔✔
+# running php upgrade inspect see: https://github.com/silverstripe/silverstripe-upgrader
+cd /var/www/upgrades/recipes
+php /var/www/upgrades/upgrader_tool/vendor/silverstripe/upgrader/bin/upgrade-code inspect /var/www/upgrades/recipes/recipes/src  --root-dir=/var/www/upgrades/recipes --write -vvv
+Writing changes for 0 files
+Running post-upgrade on "/var/www/upgrades/recipes/recipes/src"
+[2020-11-30 15:43:11] Applying ApiChangeWarningsRule to GridFieldSiteTreeStateExtension.php...
+PHP Warning:  Declaration of Sunnysideup\Recipes\Pages\RecipeHolder_Controller::index() should be compatible with SilverStripe\Blog\Model\BlogController::index(SilverStripe\Control\HTTPRequest $request) in /var/www/upgrades/recipes/recipes/src/Pages/RecipeHolder_Controller.php on line 14
+[2020-11-30 15:43:12] Applying UpdateVisibilityRule to GridFieldSiteTreeStateExtension.php...
+[2020-11-30 15:43:12] Applying ApiChangeWarningsRule to Recipe_Controller.php...
+[2020-11-30 15:43:12] Applying UpdateVisibilityRule to Recipe_Controller.php...
+[2020-11-30 15:43:12] Applying ApiChangeWarningsRule to RecipeHolder_Controller.php...
+[2020-11-30 15:43:12] Applying UpdateVisibilityRule to RecipeHolder_Controller.php...
+[2020-11-30 15:43:12] Applying ApiChangeWarningsRule to Recipe.php...
+[2020-11-30 15:43:12] Applying UpdateVisibilityRule to Recipe.php...
+[2020-11-30 15:43:13] Applying ApiChangeWarningsRule to RecipeHolder.php...
+[2020-11-30 15:43:13] Applying UpdateVisibilityRule to RecipeHolder.php...
+unchanged:	Pages/Recipe.php
+Warnings for Pages/Recipe.php:
+ - Pages/Recipe.php:193 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:208 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:225 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:229 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:244 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:268 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:271 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:278 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:285 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:292 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:339 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:393 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+ - Pages/Recipe.php:429 SilverStripe\Forms\HeaderField: Requires an explicit $name constructor argument (in addition to $title)
+Writing changes for 0 files
+✔✔✔
