@@ -19,7 +19,6 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "~3.6",
         "silverstripe/blog": "^2.4.5",
         "sunnysideup/grid-field-send-to-bottom-action": "*",
         "sunnysideup/pdf_upload_field": "*",
