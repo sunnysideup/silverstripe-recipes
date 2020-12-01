@@ -3,10 +3,11 @@
 namespace Sunnysideup\Recipes\Pages;
 
 use SilverStripe\Blog\Model\BlogController;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\PaginatedList;
 
-class RecipeHolder_Controller extends BlogController
+class RecipeHolderController extends BlogController
 {
     /**
      * @var array
@@ -16,10 +17,10 @@ class RecipeHolder_Controller extends BlogController
         'tag',
     ];
 
-    public function index()
+    public function index(HTTPRequest $request)
     {
         if (! $this->isAjaxRecipeRequest()) {
-            return parent::index();
+            return parent::index($request);
         }
         $this->blogPosts = $this->dataRecord->getBlogPosts();
 
@@ -97,13 +98,6 @@ class RecipeHolder_Controller extends BlogController
         return $recipes;
     }
 
-    /**
-     * ### @@@@ START REPLACEMENT @@@@ ###
-     * OLD:     public function init() (ignore case)
-     * NEW:     protected function init() (COMPLEX)
-     * EXP: Controller init functions are now protected  please check that is a controller.
-     * ### @@@@ STOP REPLACEMENT @@@@ ###
-     */
     protected function init()
     {
         parent::init();

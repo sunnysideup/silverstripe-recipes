@@ -5,7 +5,7 @@ namespace Sunnysideup\Recipes\Pages;
 use SilverStripe\Blog\Model\BlogPostController;
 use SilverStripe\ORM\ArrayList;
 
-class Recipe_Controller extends BlogPostController
+class RecipeController extends BlogPostController
 {
     /**
      * returns all blog posts that have the same categories (any at all)

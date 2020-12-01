@@ -5,12 +5,8 @@ namespace Sunnysideup\Recipes\Pages;
 use FeaturedProductImage;
 
 
-
-
 use GridFieldSendToBottomAction;
 
-use PerfectCMSImagesUploadField;
-use PicsBlogRecipes;
 
 use SilverStripe\Assets\File;
 
@@ -31,7 +27,7 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use Sunnysideup\PdfUpload\Forms\PDFUploadField;
-use YouTubeField;
+use Sunnysideup\PerfectCmsImages\Forms\PerfectCmsImagesUploadField;
 
 class Recipe extends BlogPost
 {
@@ -46,23 +42,12 @@ class Recipe extends BlogPost
      * @var array
      */
 
-    /**
-     * ### @@@@ START REPLACEMENT @@@@ ###
-     * OLD: private static $db (case sensitive)
-     * NEW:
-    private static $db (COMPLEX)
-     * EXP: Check that is class indeed extends DataObject and that it is not a data-extension!
-     * ### @@@@ STOP REPLACEMENT @@@@ ###
-     */
     private static $table_name = 'Recipe';
 
     private static $db = [
         'FeaturedVideo' => 'Varchar(255)',
         'FeatureOnHomePage' => 'Boolean',
         'HideFeaturedImageOnEntryPage' => 'Boolean',
-        'GrandFeaturedHomePageIntro' => 'HTMLText',
-        'GrandFeatureYouTubeLink' => 'Varchar(100)',
-        'IsGrandFeaturedPicsBlogEntry' => 'Boolean',
         'ContributorTitle' => 'Varchar(200)',
         'RecipeContributorLink' => 'Varchar(200)',
         'Serves' => 'Int',
@@ -81,6 +66,7 @@ class Recipe extends BlogPost
         'Ingredients5' => 'Text',
         'DirectionsHeader' => 'Varchar',
         'CuisineType' => 'Varchar(200)',
+        'FeaturedVideo'  => 'Varchar(200)',
     ];
 
     /**
@@ -98,60 +84,21 @@ class Recipe extends BlogPost
      * @var array
      */
     private static $has_one = [
-
-        /**
-         * ### @@@@ START REPLACEMENT @@@@ ###
-         * WHY: automated upgrade
-         * OLD:  => 'Image' (case sensitive)
-         * NEW:  => 'Image' (COMPLEX)
-         * EXP: you may want to add ownership (owns)
-         * ### @@@@ STOP REPLACEMENT @@@@ ###
-         */
         'GrandFeaturedHomePageImage' => Image::class,
         'RecipePDF' => File::class,
-
-        /**
-         * ### @@@@ START REPLACEMENT @@@@ ###
-         * WHY: automated upgrade
-         * OLD:  => 'Image' (case sensitive)
-         * NEW:  => 'Image' (COMPLEX)
-         * EXP: you may want to add ownership (owns)
-         * ### @@@@ STOP REPLACEMENT @@@@ ###
-         */
         'FeaturedImage2' => Image::class,
-
-        /**
-         * ### @@@@ START REPLACEMENT @@@@ ###
-         * WHY: automated upgrade
-         * OLD:  => 'Image' (case sensitive)
-         * NEW:  => 'Image' (COMPLEX)
-         * EXP: you may want to add ownership (owns)
-         * ### @@@@ STOP REPLACEMENT @@@@ ###
-         */
         'FeaturedImage3' => Image::class,
-
-        /**
-         * ### @@@@ START REPLACEMENT @@@@ ###
-         * WHY: automated upgrade
-         * OLD:  => 'Image' (case sensitive)
-         * NEW:  => 'Image' (COMPLEX)
-         * EXP: you may want to add ownership (owns)
-         * ### @@@@ STOP REPLACEMENT @@@@ ###
-         */
         'FeaturedImage4' => Image::class,
+        'FeaturedImage5' => Image::class
+    ];
 
-        /**
-         * ### @@@@ START REPLACEMENT @@@@ ###
-         * WHY: automated upgrade
-         * OLD:  => 'Image' (case sensitive)
-         * NEW:  => 'Image' (COMPLEX)
-         * EXP: you may want to add ownership (owns)
-         * ### @@@@ STOP REPLACEMENT @@@@ ###
-         */
-        'FeaturedImage5' => Image::class,
-        'RecommendedProduct1' => 'FeaturedProductImage',
-        'RecommendedProduct2' => 'FeaturedProductImage',
-        'RecommendedProduct3' => 'FeaturedProductImage',
+    private static $owns = [
+        'GrandFeaturedHomePageImage',
+        'RecipePDF',
+        'FeaturedImage2',
+        'FeaturedImage3',
+        'FeaturedImage4',
+        'FeaturedImage5',
     ];
 
     /**
@@ -169,12 +116,12 @@ class Recipe extends BlogPost
     {
         $fields = parent::getCMSFields();
         if ($this->IsRecipe()) {
-            $fields->insertBefore(new Tab('RecipeMoreDetails', 'Recipe More Details'), 'Translations');
-            $fields->insertBefore(new Tab('Slideshow', 'Slideshow'), 'Translations');
+            $fields->insertBefore(new Tab('RecipeMoreDetails', 'Recipe More Details'), 'PostOptions');
+            $fields->insertBefore(new Tab('Slideshow', 'Slideshow'), 'PostOptions');
             $fields->addFieldsToTab(
                 'Root.Main',
                 [
-                    HeaderField::create('RecipeHeader', Recipe::class),
+                    HeaderField::create('RecipeHeader', 'Recipe'),
                     TextField::create('CuisineType', 'Cuisine Type')->setRightTitle('The cuisine of the recipe (eg, French or Ethiopian)'),
                     TextField::create('Ingredients1Header', 'Ingredients Header')
                         ->setRightTitle('Usually this is simply ingredients, but if you like to enter more than one list then you can call it, for example, ingredients for filling, bun, or sauce - to distinguish it from the second ingredient list.'),
@@ -190,21 +137,6 @@ class Recipe extends BlogPost
                 'Root.RecipeMoreDetails',
                 [
                     HeaderField::create('MyProducts', 'Related Products'),
-                    DropdownField::create(
-                        'RecommendedProduct1ID',
-                        'Recommended Pics Product 1',
-                        ['' => '-- please select one --'] + FeaturedProductImage::get()->map()->toArray()
-                    ),
-                    DropdownField::create(
-                        'RecommendedProduct2ID',
-                        'Recommended Pics Product 2',
-                        ['' => '-- please select one --'] + FeaturedProductImage::get()->map()->toArray()
-                    ),
-                    DropdownField::create(
-                        'RecommendedProduct3ID',
-                        'Recommended Pics Product 3',
-                        ['' => '-- please select one --'] + FeaturedProductImage::get()->map()->toArray()
-                    ),
 
                     HeaderField::create('ContributorHeader', 'Contributor'),
                     TextField::create('ContributorTitle', 'Contributor Title'),
@@ -212,42 +144,17 @@ class Recipe extends BlogPost
 
                     HeaderField::create('ServesHeader', 'Servings'),
 
-                    /**
-                     * ### @@@@ START REPLACEMENT @@@@ ###
-                     * WHY: automated upgrade
-                     * OLD: NumericField::create (case sensitive)
-                     * NEW: NumericField::create (COMPLEX)
-                     * EXP: check the number of decimals required and add as ->setScale(2)
-                     * ### @@@@ STOP REPLACEMENT @@@@ ###
-                     */
                     NumericField::create('Serves', 'Serves')
-                        ->setRightTitle('e.g. 4'),
+                        ->setRightTitle('e.g. 4')->setScale(0),
                     TextField::create('ServesDescription', 'Serves Description')
                         ->setRightTitle('optional ... e.g. entree sized servings, serves four children, etc.... '),
 
                     HeaderField::create('PrepTimeHeader', 'Time Required'),
-
-                    /**
-                     * ### @@@@ START REPLACEMENT @@@@ ###
-                     * WHY: automated upgrade
-                     * OLD: NumericField::create (case sensitive)
-                     * NEW: NumericField::create (COMPLEX)
-                     * EXP: check the number of decimals required and add as ->setScale(2)
-                     * ### @@@@ STOP REPLACEMENT @@@@ ###
-                     */
                     NumericField::create('PrepTimeInMinutes', 'Prep Time in Minutes')
-                        ->setRightTitle('e.g. 60'),
+                        ->setRightTitle('e.g. 60')->setScale(0),
 
-                    /**
-                     * ### @@@@ START REPLACEMENT @@@@ ###
-                     * WHY: automated upgrade
-                     * OLD: NumericField::create (case sensitive)
-                     * NEW: NumericField::create (COMPLEX)
-                     * EXP: check the number of decimals required and add as ->setScale(2)
-                     * ### @@@@ STOP REPLACEMENT @@@@ ###
-                     */
                     NumericField::create('CookingTimeInMinutes', 'Cooking Time in Minutes')
-                        ->setRightTitle('e.g. 20'),
+                        ->setRightTitle('e.g. 20')->setScale(0),
 
                     HeaderField::create('DownloadHeader', 'Download'),
                     PDFUploadField::create('RecipePDF', 'Recipe PDF'),
@@ -343,7 +250,7 @@ class Recipe extends BlogPost
         $fields->addFieldsToTab(
             'Root.Slideshow',
             [
-                $uploadField2 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage2', $title = 'Featured Image 2', null, 'FeaturedImage'),
+                $uploadField2 = PerfectCmsImagesUploadField::create($name = 'FeaturedImage2', $title = 'Featured Image 2', null, 'FeaturedImage'),
                 $uploadField3 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage3', $title = 'Featured Image 3', null, 'FeaturedImage'),
                 $uploadField4 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage4', $title = 'Featured Image 4', null, 'FeaturedImage'),
                 $uploadField5 = PerfectCMSImagesUploadField::create($name = 'FeaturedImage5', $title = 'Featured Image 5', null, 'FeaturedImage'),
@@ -370,42 +277,19 @@ class Recipe extends BlogPost
         );
 
         $fields->removeByName('Ratings');
-        $fields->addFieldsToTab(
-            'Root.Images',
-            [
-                HeaderField::create('GalleryHeading', 'Add a popup Gallery to your Blog Entry'),
-            ],
-            'Images'
-        );
-        $fields->fieldByName('Root.Images')->setTitle('Gallery');
-        $fields->fieldByName('Root.Images.Images')->setRightTitle(
-            'You can upload multiple images to this field at once.</br>
-             To do this: click "From you computer", then select all the images you want to upload, then click open.</br>
-             <strong>File size of each image uploaded needs to be less than 2MB.</strong>'
-        );
 
         $contentField = HTMLEditorField::create('Content', 'Content')->setRows(17);
 
-        if ($this->IsRecipe()) {
-            $contentField->setTitle('Directions')->setDescription('Make sure to only enter the directions for the recipe without any header. Ingredients can be added at the top of this tab and all the other details can be added in the RECIPE MORE DETAILS tab.');
-            $fields->addFieldsToTab(
-                'Root.Main',
-                [
-                    $contentField,
-                    YouTubeField::create('FeaturedVideo', 'YouTube link')->setRightTitle('The YouTube ID for the video, for example Hri1yBUR_CI. You can also paste the YouTube URL of the video.'),
-                ],
-                'UploadDirRulesNotes'
-            );
-        } else {
-            $fields->addFieldToTab('Root.Main', $contentField, 'UploadDirRulesNotes');
-            $fields->insertBefore(
-                'FeaturedImage',
-                YouTubeField::create('FeaturedVideo', 'YouTube link')->setRightTitle(
-                    'The YouTube ID for the video, for example Hri1yBUR_CI. You can also paste the YouTube URL of the video.<br>
-                    <strong>If a YouTube Video is provided then the Featured Image will only be used for the summary on the main blog holder page.</strong>'
-                )
-            );
-        }
+        $contentField->setTitle('Directions')->setDescription('Make sure to only enter the directions for the recipe without any header. Ingredients can be added at the top of this tab and all the other details can be added in the RECIPE MORE DETAILS tab.');
+        $fields->addFieldsToTab(
+            'Root.Main',
+            [
+                $contentField,
+                TextField::create('FeaturedVideo', 'YouTube link')->setRightTitle('The YouTube ID for the video, for example Hri1yBUR_CI. You can also paste the YouTube URL of the video.'),
+            ],
+            'UploadDirRulesNotes'
+        );
+
 
         $fields->addFieldToTab('Root.Main', HeaderField::create('SummaryHeader', 'Summary'), 'Title');
         return $fields;
@@ -425,9 +309,7 @@ class Recipe extends BlogPost
     public function onAfterUnpublish()
     {
         parent::onAfterUnpublish();
-        if ($this->IsRecipe()) {
-            GridFieldSendToBottomAction::sendToBottomOfList(SiteTree::class, 'Sort', $this->ID);
-        }
+        //GridFieldSendToBottomAction::sendToBottomOfList(SiteTree::class, 'Sort', $this->ID);
     }
 
     /**
@@ -459,7 +341,7 @@ class Recipe extends BlogPost
      */
     public function IsRecipe()
     {
-        return $this->Parent() && $this->Parent() instanceof PicsBlogRecipes;
+        return $this->Parent() && $this->Parent() instanceof RecipeHolder;
     }
 
     /**

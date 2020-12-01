@@ -2,37 +2,29 @@
 
 namespace Sunnysideup\Recipes\Pages;
 
-use GridfieldConfig_RecordEditor;
 
 use GridFieldSendToBottomAction;
-use GridFieldSortableRows;
 
 
 use SilverStripe\Blog\Model\Blog;
 use SilverStripe\Blog\Model\BlogCategory;
 use SilverStripe\Blog\Model\BlogTag;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
 use SilverStripe\Versioned\Versioned;
 use Sunnysideup\Recipes\Forms\GridField\GridFieldSiteTreeStateExtension;
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 
 class RecipeHolder extends Blog
 {
-    /**
-     * ### @@@@ START REPLACEMENT @@@@ ###
-     * OLD: private static $db (case sensitive)
-     * NEW:
-    private static $db (COMPLEX)
-     * EXP: Check that is class indeed extends DataObject and that it is not a data-extension!
-     * ### @@@@ STOP REPLACEMENT @@@@ ###
-     */
+
     private static $table_name = 'RecipeHolder';
 
     private static $db = [
-        'RecipesSideBarVideo' => 'Varchar(255)',
     ];
 
     private static $can_create = true;
@@ -79,7 +71,7 @@ class RecipeHolder extends Blog
                     'PublishedBlogPosts',
                     'Published Blog Posts',
                     $publishedPosts,
-                    $config = GridfieldConfig_RecordEditor::create()
+                    $config = GridFieldConfig_RecordEditor::create()
                 ),
             ]
         );
@@ -89,8 +81,8 @@ class RecipeHolder extends Blog
             $childPagesConfig = $fieldToChange->getConfig();
             $childPagesConfig->removeComponentsByType(GridFieldSiteTreeState::class)
                 ->addComponent(new GridFieldSiteTreeStateExtension())
-                ->addComponent($sortable = new GridFieldSortableRows('Sort'))
-                ->addComponent(new GridFieldSendToBottomAction('Sort', 'Live'));
+                ->addComponent($sortable = new GridFieldSortableRows('Sort'));
+                //->addComponent(new GridFieldSendToBottomAction('Sort', 'Live'));
             $sortable->setUpdateVersionedStage('Live');
 
             $paginator = $childPagesConfig->getComponentByType(GridFieldPaginator::class);

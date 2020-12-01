@@ -44,16 +44,7 @@ class GridFieldSiteTreeStateExtension extends GridFieldSiteTreeState
         switch ($columnName) {
             case 'CMSThumbnail':
                 return [
-
-                    /**
-                     * ### @@@@ START REPLACEMENT @@@@ ###
-                     * WHY: automated upgrade
-                     * OLD:  => 'Image' (case sensitive)
-                     * NEW:  => 'Image' (COMPLEX)
-                     * EXP: you may want to add ownership (owns)
-                     * ### @@@@ STOP REPLACEMENT @@@@ ###
-                     */
-                    'title' => Image::class,
+                    'title' => 'Image',
                 ];
             case 'Created':
                 return [

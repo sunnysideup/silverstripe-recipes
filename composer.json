@@ -20,7 +20,7 @@
     ],
     "require": {
         "silverstripe/blog": "^3.6",
-        "sunnysideup/pdf_upload_field": "*",
+        "sunnysideup/pdf_upload_field": "^2.0",
         "sunnysideup/perfect_cms_images": "^4.3",
         "silverstripe/recipe-cms": "^4.4"
     },
