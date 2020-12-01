@@ -2,11 +2,6 @@
 
 namespace Sunnysideup\Recipes\Pages;
 
-use FeaturedProductImage;
-
-
-use GridFieldSendToBottomAction;
-
 
 use SilverStripe\Assets\File;
 
@@ -15,6 +10,7 @@ use SilverStripe\Assets\Image;
 use SilverStripe\Blog\Model\BlogCategory;
 use SilverStripe\Blog\Model\BlogPost;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\HeaderField;
@@ -26,6 +22,7 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
+use Sunnysideup\GridFieldSendToBottomAction\Forms\GridField\GridFieldSendToBottomAction;
 use Sunnysideup\PdfUpload\Forms\PDFUploadField;
 use Sunnysideup\PerfectCmsImages\Forms\PerfectCmsImagesUploadField;
 
@@ -309,7 +306,8 @@ class Recipe extends BlogPost
     public function onAfterUnpublish()
     {
         parent::onAfterUnpublish();
-        //GridFieldSendToBottomAction::sendToBottomOfList(SiteTree::class, 'Sort', $this->ID);
+        $gridFieldAction = new GridFieldSendToBottomAction('Sort');
+        $gridFieldAction->sendToBottomOfList(SiteTree::class, 'Sort', $this->ID);
     }
 
     /**

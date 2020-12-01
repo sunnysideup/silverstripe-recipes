@@ -3,9 +3,6 @@
 namespace Sunnysideup\Recipes\Pages;
 
 
-use GridFieldSendToBottomAction;
-
-
 use SilverStripe\Blog\Model\Blog;
 use SilverStripe\Blog\Model\BlogCategory;
 use SilverStripe\Blog\Model\BlogTag;
@@ -16,6 +13,7 @@ use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
 use SilverStripe\Versioned\Versioned;
+use Sunnysideup\GridFieldSendToBottomAction\Forms\GridField\GridFieldSendToBottomAction;
 use Sunnysideup\Recipes\Forms\GridField\GridFieldSiteTreeStateExtension;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 
@@ -81,8 +79,8 @@ class RecipeHolder extends Blog
             $childPagesConfig = $fieldToChange->getConfig();
             $childPagesConfig->removeComponentsByType(GridFieldSiteTreeState::class)
                 ->addComponent(new GridFieldSiteTreeStateExtension())
-                ->addComponent($sortable = new GridFieldSortableRows('Sort'));
-                //->addComponent(new GridFieldSendToBottomAction('Sort', 'Live'));
+                ->addComponent($sortable = new GridFieldSortableRows('Sort'))
+                ->addComponent(new GridFieldSendToBottomAction('Sort', 'Live'));
             $sortable->setUpdateVersionedStage('Live');
 
             $paginator = $childPagesConfig->getComponentByType(GridFieldPaginator::class);
