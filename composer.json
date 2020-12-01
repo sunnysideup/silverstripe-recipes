@@ -19,9 +19,9 @@
         }
     ],
     "require": {
-        "silverstripe/blog": "^2.4.5",
+        "silverstripe/blog": "^3.6",
         "sunnysideup/pdf_upload_field": "*",
-        "sunnysideup/perfect_cms_images": "*",
+        "sunnysideup/perfect_cms_images": "^4.3",
         "silverstripe/recipe-cms": "^4.4"
     },
     "autoload": {
