@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "silverstripe/blog": "^3.6",
+        "silverstripe/blog": "^4",
 
         "sunnysideup/pdf_upload_field": "dev-master",
         "sunnysideup/perfect_cms_images": "dev-master",
