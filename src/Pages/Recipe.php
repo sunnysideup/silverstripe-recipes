@@ -443,7 +443,7 @@ class Recipe extends BlogPost
         //remove white space
         $field = 'Ingredients' . $number;
         $fieldTitle = 'Ingredients' . $number . 'Header';
-        $string = trim($this->{$field});
+        $string = trim($this->obj($field));
         $array = explode("\n", $string);
         $al = ArrayList::create();
         foreach ($array as $item) {
