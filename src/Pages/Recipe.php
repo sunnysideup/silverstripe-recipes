@@ -444,6 +444,7 @@ class Recipe extends BlogPost
         $field = 'Ingredients' . $number;
         $fieldTitle = 'Ingredients' . $number . 'Header';
         $string = trim($this->obj($field));
+        $string = strip_tags($string);
         $array = explode("\n", $string);
         $al = ArrayList::create();
         foreach ($array as $item) {
