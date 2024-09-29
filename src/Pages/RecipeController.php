@@ -62,7 +62,15 @@ class RecipeController extends BlogPostController
      */
     public function timeToISODuration($timeString)
     {
-        $time = strtotime($timeString, 0);
+
+/**
+  * ### @@@@ START REPLACEMENT @@@@ ###
+  * WHY: automated upgrade
+  * OLD: strtotime($
+  * EXP: SS5 change
+  * ### @@@@ STOP REPLACEMENT @@@@ ###
+  */
+        $time = strtotime((string) $timeString, 0);
 
         $units = [
             'Y' => 365 * 24 * 3600,
