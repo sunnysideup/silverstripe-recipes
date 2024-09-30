@@ -48,16 +48,7 @@ class RecipeAdmin extends ModelAdmin
             if ($gridField instanceof GridField) {
                 $gridField->setConfig(GridFieldConfigBlogPost::create(999));
                 $source = $gridField->getList();
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: ->sort(
-  * NEW: ->sort( ...  (COMPLEX)
-  * EXP: This method no longer accepts raw sql, only known field names.  If you have raw SQL then use ->orderBy
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
-                $source = $source->sort(['Created' => 'Desc']);
+                $source = $source->sort('Created', 'Desc');
                 $gridField->setList($source);
             }
         }

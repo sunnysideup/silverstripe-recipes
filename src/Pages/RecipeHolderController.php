@@ -79,15 +79,6 @@ class RecipeHolderController extends BlogController
 
     public function PaginatedRecipes()
     {
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: ->sort(
-  * NEW: ->sort( ...  (COMPLEX)
-  * EXP: This method no longer accepts raw sql, only known field names.  If you have raw SQL then use ->orderBy
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
         $allPosts = $this->blogPosts->sort('Sort ASC') ?: new ArrayList();
 
         $recipes = PaginatedList::create($allPosts);
@@ -130,15 +121,6 @@ class RecipeHolderController extends BlogController
 
     public function PaginatedRecipesByPublishDate()
     {
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: ->sort(
-  * NEW: ->sort( ...  (COMPLEX)
-  * EXP: This method no longer accepts raw sql, only known field names.  If you have raw SQL then use ->orderBy
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
         $allPosts = $this->blogPosts->sort('PublishDate DESC') ?: new ArrayList();
 
         $recipes = PaginatedList::create($allPosts);

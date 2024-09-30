@@ -57,16 +57,7 @@ class RecipeHolder extends Blog
         $fields = parent::getCMSFields();
         $fields->removeByName('Ratings');
 
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: ->insertBefore(
-  * NEW: ->insertBefore( ...  (COMPLEX)
-  * EXP: Name of the field to insert before is listed first, then the field - just check this.
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
-        $fields->insertBefore(new Tab('PublishedPosts', 'Published Posts'), 'Main');
+        $fields->insertBefore('Main', new Tab('PublishedPosts', 'Published Posts'));
 
         $publishedPosts = Versioned::get_by_stage(Recipe::class, 'Live')->filter(
             [
@@ -98,27 +89,9 @@ class RecipeHolder extends Blog
         }
 
         $fields->removeByName('ChildPages');
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: ->insertBefore(
-  * NEW: ->insertBefore( ...  (COMPLEX)
-  * EXP: Name of the field to insert before is listed first, then the field - just check this.
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
-        $fields->insertBefore(new Tab('Recipes', 'Recipes'), 'Main');
+        $fields->insertBefore('Main', new Tab('Recipes', 'Recipes'));
         $fields->addFieldsToTab(
             'Root.Recipes',
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: ->sort(
-  * NEW: ->sort( ...  (COMPLEX)
-  * EXP: This method no longer accepts raw sql, only known field names.  If you have raw SQL then use ->orderBy
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
             $fieldToChange->setList($fieldToChange->getList()->sort('PublishDate DESC'))
         );
 

@@ -377,15 +377,6 @@ class Recipe extends BlogPost
         return parent::validate();
     }
 
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: publish(
-  * NEW: publish( ...  (COMPLEX)
-  * EXP: Removed deprecated method ... SilverStripe\Versioned\Versioned::publish() - use SilverStripe\Versioned\Versioned::copyVersionToStage() instead
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
     public function onAfterUnpublish()
     {
         $gridFieldAction = new \Sunnysideup\GridFieldSendToBottomAction\Forms\GridField\GridFieldSendToBottomAction('Sort');
@@ -452,27 +443,11 @@ class Recipe extends BlogPost
         //remove white space
         $field = 'Ingredients' . $number;
         $fieldTitle = 'Ingredients' . $number . 'Header';
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: trim(
-  * EXP: SS5 change
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
         $string = trim((string) $this->obj($field));
         $string = strip_tags($string);
         $array = explode("\n", $string);
         $al = ArrayList::create();
         foreach ($array as $item) {
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: trim(
-  * EXP: SS5 change
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
             $item = trim((string) $item);
             if ('' !== $item) {
                 $al->push(new ArrayData(['Ingredient' => $item]));

@@ -42,16 +42,8 @@ class BlogTagExtension extends DataExtension
                 CheckboxField::create('ShowOnSite', 'Show on Site'),
             ]
         );
-
-/**
-  * ### @@@@ START REPLACEMENT @@@@ ###
-  * WHY: automated upgrade
-  * OLD: ->sort(
-  * NEW: ->sort( ...  (COMPLEX)
-  * EXP: This method no longer accepts raw sql, only known field names.  If you have raw SQL then use ->orderBy
-  * ### @@@@ STOP REPLACEMENT @@@@ ###
-  */
-        $list = Recipe::get()->sort(['Title' => 'ASC']);
+        
+        $list = Recipe::get()->sort('Title', 'ASC');
         $fields->addFieldsToTab(
             'Root.Recipes',
             [
