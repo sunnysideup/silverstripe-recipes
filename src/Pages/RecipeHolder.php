@@ -28,8 +28,6 @@ class RecipeHolder extends Blog
     private static $db = [
     ];
 
-    private static $can_create = true;
-
     private static $can_be_root = true;
 
     private static $allowed_children = [
@@ -156,5 +154,17 @@ class RecipeHolder extends Blog
                 $validIDs[$blog->ID] = $blog->ID;
             }
         }
+    }
+
+    public function canCreate($member = null, $context = [])
+    {
+        return ! (bool) RecipeHolder::get()->count();
+    }
+
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        $this->URLSegment = 'recipes';
+        $this->ParentID = 0;
     }
 }
