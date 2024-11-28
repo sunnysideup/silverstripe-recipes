@@ -63,7 +63,6 @@ use Sunnysideup\PerfectCmsImages\Forms\PerfectCmsImagesUploadField;
  */
 class Recipe extends BlogPost
 {
-
     private static $default_sort = '"PublishDate" IS NULL DESC, "PublishDate" DESC';
 
     private static $can_create = true;
@@ -183,28 +182,24 @@ class Recipe extends BlogPost
                 TextField::create('Ingredients2Header', 'Ingredients #2 Header')
                     ->setDescription('Optional ingredient list for second section'),
                 TextareaField::create('Ingredients2', 'Ingredients #2')
-                    ->setRows(12)
                     ->setDescription('Separate each entry with a new line, no other formatting needed.'),
 
                 HeaderField::create('IngredientListN3', 'Ingredient Lists - 3'),
                 TextField::create('Ingredients3Header', 'Ingredients #3 Header')
                     ->setDescription('Optional ingredient list for third'),
                 TextareaField::create('Ingredients3', 'Ingredients #3')
-                    ->setRows(12)
                     ->setDescription('Separate each entry with a new line, no other formatting needed.'),
 
                 HeaderField::create('IngredientListN4', 'Ingredient Lists - 4'),
                 TextField::create('Ingredients4Header', 'Ingredients #4 Header')
                     ->setDescription('Optional ingredient for fourth list'),
                 TextareaField::create('Ingredients4', 'Ingredients #4')
-                    ->setRows(12)
                     ->setDescription('Separate each entry with a new line, no other formatting needed.'),
 
                 HeaderField::create('IngredientListN5', 'Ingredient Lists - 5'),
                 TextField::create('Ingredients5Header', 'Ingredients #5 Header')
                     ->setDescription('Optional ingredient list for fifth section'),
                 TextareaField::create('Ingredients5', 'Ingredients #5')
-                    ->setRows(12)
                     ->setDescription('Separate each entry with a new line, no other formatting needed.'),
             ]
         );
@@ -340,7 +335,6 @@ class Recipe extends BlogPost
                         If no summary is specified the first 30 words will be used from the Directions.
                 '),
                 HTMLEditorField::create('Content', 'Directions')
-                    ->setRows(17)
                     ->setDescription('
                         Make sure to only enter the directions for the recipe without any header.
                         Ingredients can be added at the top of this tab and all the other details can be added in the RECIPE MORE DETAILS tab.'),
@@ -354,7 +348,6 @@ class Recipe extends BlogPost
                 TextField::create('Ingredients1Header', 'Ingredients Header')
                     ->setDescription('Usually this is simply ingredients, but if you like to enter more than one list then you can call it, for example, ingredients for filling, bun, or sauce - to distinguish it from the second ingredient list.'),
                 TextareaField::create('Ingredients1', 'Ingredients')
-                    ->setRows(12)
                     ->setDescription('Separate each entry with a new line, no other formatting needed. Please note that if you have more than one list (e.g. base and topping) then you can use the RECIPE MORE DETAILS tab to enter separate lists.'),
                 TextField::create('DirectionsHeader', 'Directions Header')->setDescription('This defaults to "Directions" but can be set to something else or left blank if desired.'),
                 TextField::create('FeaturedVideo', 'YouTube link')
