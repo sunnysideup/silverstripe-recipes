@@ -64,7 +64,7 @@ class RecipeHolder extends Blog
                 ->removeComponentsByType(GridFieldDeleteAction::class)
             ;
             $paginator = $childPagesConfig->getComponentByType(GridFieldPaginator::class);
-            $paginator->setItemsPerPage(999);
+            $paginator->setItemsPerPage(10);
 
             $fields->removeByName('ChildPages');
             $fields->insertBefore('Categorisation', new Tab('Recipes', 'Recipes'));
