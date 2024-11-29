@@ -26,7 +26,7 @@ class RecipeAdmin extends ModelAdmin
      *
      * @var int Amount of results to show per page
      */
-    private static $page_length = 999;
+    private static $page_length = 20;
 
     private static $managed_models = [
         Recipe::class,

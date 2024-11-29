@@ -54,26 +54,7 @@ class RecipeHolder extends Blog
     {
         $fields = parent::getCMSFields();
         $fields->removeByName('Ratings');
-
-        $fields->insertBefore('Main', new Tab('PublishedPosts', 'Published Posts'));
-
-        $publishedPosts = Versioned::get_by_stage(Recipe::class, 'Live')->filter(
-            [
-                'ParentID' => $this->ID,
-            ]
-        );
-
-        $fields->addFieldsToTab(
-            'Root.PublishedPosts',
-            [
-                GridField::create(
-                    'PublishedBlogPosts',
-                    'Published Recipes',
-                    $publishedPosts,
-                    $config = GridFieldConfig_RecordEditor::create()
-                ),
-            ]
-        );
+        $fields->removeByName('PublishedPosts');
 
         $fieldToChange = $fields->fieldByName('Root.ChildPages.ChildPages');
         if ($fieldToChange) {
@@ -84,16 +65,14 @@ class RecipeHolder extends Blog
             ;
             $paginator = $childPagesConfig->getComponentByType(GridFieldPaginator::class);
             $paginator->setItemsPerPage(999);
+
+            $fields->removeByName('ChildPages');
+            $fields->insertBefore('Categorisation', new Tab('Recipes', 'Recipes'));
+            $fields->addFieldsToTab(
+                'Root.Recipes',
+                $fieldToChange->setList($fieldToChange->getList()->sort('PublishDate DESC'))
+            );
         }
-
-        $fields->removeByName('ChildPages');
-        $fields->insertBefore('Main', new Tab('Recipes', 'Recipes'));
-        $fields->addFieldsToTab(
-            'Root.Recipes',
-            $fieldToChange->setList($fieldToChange->getList()->sort('PublishDate DESC'))
-        );
-
-        $fields->removeByName('PublishedPosts');
 
 
         return $fields;
