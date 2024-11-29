@@ -23,6 +23,7 @@ use SilverStripe\ORM\DataList;
 use SilverStripe\View\ArrayData;
 use Sunnysideup\PdfUpload\Forms\PDFUploadField;
 use Sunnysideup\PerfectCmsImages\Forms\PerfectCmsImagesUploadField;
+use Page;
 
 /**
  * Class \Sunnysideup\Recipes\Pages\Recipe
@@ -148,13 +149,43 @@ class Recipe extends BlogPost
     {
         //copied from blog post:
 
-        $fields = \Page::getCMSFields();
+        $fields = Page::getCMSFields();
         // $fields->insertBefore(new Tab('RecipeMoreDetails', 'Recipe More Details'), 'PostOptions');
         // $fields->insertBefore(new Tab('Slideshow', 'Slideshow'), 'PostOptions');
 
         $fields->addFieldsToTab(
+            'Root.RecipeSummary',
+            [
+                HTMLEditorField::create('Summary', 'Recipe Summary')
+                    ->setRows(20)
+                    ->setDescription('
+                        Summarise the entry in around 30 words...
+                        If no summary is specified the first 30 words will be used from the Directions.
+                '),
+                HTMLEditorField::create('Content', 'Directions')
+                    ->setDescription('
+                        Make sure to only enter the directions for the recipe without any header.
+                        Ingredients can be added at the top of this tab and all the other details can be added in the RECIPE MORE DETAILS tab.'),
+                CheckboxField::create('HideFeaturedImageOnEntryPage', 'Hide Image On Post Page')
+                    ->setDescription('Check this box if the featured image should only be displayed with the summary on the main recipe holder page'),
+                PerfectCMSImagesUploadField::create('FeaturedImage', 'Featured Image')
+                    ->setDescription('The main image for the recipe entry.'),
+            ]
+        );
+        $fields->addFieldsToTab(
             'Root.RecipeMoreDetails',
             [
+                HeaderField::create('RecipeHeader', 'Recipe'),
+                TextField::create('CuisineType', 'Cuisine Type')
+                    ->setDescription('The cuisine of the recipe (eg, French or Ethiopian)'),
+                TextField::create('Ingredients1Header', 'Ingredients Header')
+                    ->setDescription('Usually this is simply ingredients, but if you like to enter more than one list then you can call it, for example, ingredients for filling, bun, or sauce - to distinguish it from the second ingredient list.'),
+                TextareaField::create('Ingredients1', 'Ingredients')
+                    ->setDescription('Separate each entry with a new line, no other formatting needed. Please note that if you have more than one list (e.g. base and topping) then you can use the RECIPE MORE DETAILS tab to enter separate lists.'),
+                TextField::create('DirectionsHeader', 'Directions Header')->setDescription('This defaults to "Directions" but can be set to something else or left blank if desired.'),
+                TextField::create('FeaturedVideo', 'YouTube link')
+                    ->setDescription('The YouTube ID for the video, for example Hri1yBUR_CI. You can also paste the YouTube URL of the video.'),
+
                 HeaderField::create('MyProducts', 'Related Products'),
 
                 HeaderField::create('ContributorHeader', 'Contributor'),
@@ -325,35 +356,6 @@ class Recipe extends BlogPost
 
         // replace standard FeaturedImage CMS field with PerfectCMSImagesUploadField
 
-        $fields->addFieldsToTab(
-            'Root.Main',
-            [
-                HTMLEditorField::create('Summary', 'Recipe Summary')
-                    ->setRows(5)
-                    ->setDescription('
-                        Summarise the entry in around 30 words...
-                        If no summary is specified the first 30 words will be used from the Directions.
-                '),
-                HTMLEditorField::create('Content', 'Directions')
-                    ->setDescription('
-                        Make sure to only enter the directions for the recipe without any header.
-                        Ingredients can be added at the top of this tab and all the other details can be added in the RECIPE MORE DETAILS tab.'),
-                CheckboxField::create('HideFeaturedImageOnEntryPage', 'Hide Image On Post Page')
-                    ->setDescription('Check this box if the featured image should only be displayed with the summary on the main recipe holder page'),
-                PerfectCMSImagesUploadField::create('FeaturedImage', 'Featured Image')
-                    ->setDescription('The main image for the recipe entry.'),
-                HeaderField::create('RecipeHeader', 'Recipe'),
-                TextField::create('CuisineType', 'Cuisine Type')
-                    ->setDescription('The cuisine of the recipe (eg, French or Ethiopian)'),
-                TextField::create('Ingredients1Header', 'Ingredients Header')
-                    ->setDescription('Usually this is simply ingredients, but if you like to enter more than one list then you can call it, for example, ingredients for filling, bun, or sauce - to distinguish it from the second ingredient list.'),
-                TextareaField::create('Ingredients1', 'Ingredients')
-                    ->setDescription('Separate each entry with a new line, no other formatting needed. Please note that if you have more than one list (e.g. base and topping) then you can use the RECIPE MORE DETAILS tab to enter separate lists.'),
-                TextField::create('DirectionsHeader', 'Directions Header')->setDescription('This defaults to "Directions" but can be set to something else or left blank if desired.'),
-                TextField::create('FeaturedVideo', 'YouTube link')
-                    ->setDescription('The YouTube ID for the video, for example Hri1yBUR_CI. You can also paste the YouTube URL of the video.'),
-            ]
-        );
 
         return $fields;
     }
