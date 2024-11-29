@@ -156,6 +156,11 @@ class Recipe extends BlogPost
         $fields->addFieldsToTab(
             'Root.RecipeSummary',
             [
+                PerfectCMSImagesUploadField::create('FeaturedImage', 'Featured Image', )
+                    ->setDescription('The main image for the recipe entry.')
+                    ->selectFormattingStandard('FeaturedImage'),
+                CheckboxField::create('HideFeaturedImageOnEntryPage', 'Hide Image On Post Page')
+                    ->setDescription('Check this box if the featured image should only be displayed with the summary on the main recipe holder page'),
                 HTMLEditorField::create('Summary', 'Recipe Summary')
                     ->setRows(20)
                     ->setDescription('
@@ -166,10 +171,6 @@ class Recipe extends BlogPost
                     ->setDescription('
                         Make sure to only enter the directions for the recipe without any header.
                         Ingredients can be added at the top of this tab and all the other details can be added in the RECIPE MORE DETAILS tab.'),
-                CheckboxField::create('HideFeaturedImageOnEntryPage', 'Hide Image On Post Page')
-                    ->setDescription('Check this box if the featured image should only be displayed with the summary on the main recipe holder page'),
-                PerfectCMSImagesUploadField::create('FeaturedImage', 'Featured Image')
-                    ->setDescription('The main image for the recipe entry.'),
             ]
         );
         $fields->addFieldsToTab(
