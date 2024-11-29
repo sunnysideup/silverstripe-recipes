@@ -46,17 +46,11 @@ class RecipeAdmin extends ModelAdmin
         if (Recipe::class === $this->modelClass && $gridField = $form->Fields()->dataFieldByName($this->sanitiseClassName($this->modelClass))) {
             //This is just a precaution to ensure we got a GridField from dataFieldByName() which you should have
             if ($gridField instanceof GridField) {
-                $gridField->setConfig(GridFieldConfigBlogPost::create(999));
                 $source = $gridField->getList();
                 $source = $source->sort('Created', 'Desc');
                 $gridField->setList($source);
             }
         }
-        Requirements::customCSS('
-            body {
-                overflow: hidden;
-            }
-        ');
 
         return $form;
     }

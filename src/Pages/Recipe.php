@@ -459,11 +459,18 @@ class Recipe extends BlogPost
     protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
+        $this->ParentID = RecipeHolder::get()->first()->ID;
         $this->IsGrandFeaturedBlogEntry = false;
         if (strlen((string) $this->GrandFeaturedHomePageIntro) > 10) {
             if ($this->GrandFeaturedHomePageImageID || $this->GrandFeatureYouTubeLink) {
                 $this->IsGrandFeaturedBlogEntry = true;
             }
         }
+        $this->ParentID = RecipeHolder::get()->first()->ID;
+    }
+    public function populateDefaults()
+    {
+        parent::populateDefaults();
+        $this->ParentID = RecipeHolder::get()->first()->ID;
     }
 }
