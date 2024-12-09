@@ -474,6 +474,6 @@ class Recipe extends BlogPost
     public function populateDefaults()
     {
         parent::populateDefaults();
-        $this->ParentID = RecipeHolder::get()->first()->ID;
+        $this->ParentID = RecipeHolder::get()->first()?->ID ?: 0;
     }
 }
