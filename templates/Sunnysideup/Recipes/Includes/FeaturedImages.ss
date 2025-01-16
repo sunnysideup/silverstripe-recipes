@@ -6,8 +6,10 @@
                 style="background-image:url($FeaturedImage.PerfectCMSImageLink('FeaturedImage'))">
                 <meta itemprop="image" content="$FeaturedImage.AbsoluteLink">
                 </meta>
-                <a href="$ShareThisSimpleProvider.PinterestLinkForSpecificImage(FeaturedImage).URL"
+                <% if $FeaturedImage.PinterestLink %>
+                <a href="$FeaturedImage.PinterestLink"
                     class="pinterest pinit externalLink">Share on pinterest</a>
+                <% end_if %>
 
         </div>
         <% end_if %>
@@ -17,8 +19,10 @@
                 style="background-image:url($FeaturedImage2.PerfectCMSImageLink('FeaturedImage'))">
                 <meta itemprop="image" content="$FeaturedImage2.AbsoluteLink">
                 </meta>
-                <a href="$ShareThisSimpleProvider.PinterestLinkForSpecificImage(FeaturedImage2).URL"
+                <% if $FeaturedImage2.PinterestLink %>
+                <a href="$FeaturedImage2.PinterestLink"
                     class="pinterest pinit externalLink">Share on pinterest</a>
+                <% end_if %>
             </div>
         </div>
         <% end_if %>
@@ -28,8 +32,10 @@
                 style="background-image:url($FeaturedImage3.PerfectCMSImageLink('FeaturedImage'))">
                 <meta itemprop="image" content="$FeaturedImage3.AbsoluteLink">
                 </meta>
-                <a href="$ShareThisSimpleProvider.PinterestLinkForSpecificImage(FeaturedImage3).URL"
+                <% if $FeaturedImage3.PinterestLink %>
+                <a href="$FeaturedImage3.PinterestLink"
                     class="pinterest pinit externalLink">Share on pinterest</a>
+                <% end_if %>
             </div>
         </div>
         <% end_if %>
@@ -39,8 +45,10 @@
                 style="background-image:url($FeaturedImage4.PerfectCMSImageLink('FeaturedImage'))">
                 <meta itemprop="image" content="$FeaturedImage4.AbsoluteLink">
                 </meta>
-                <a href="$ShareThisSimpleProvider.PinterestLinkForSpecificImage(FeaturedImage4).URL"
+                <% if $FeaturedImage4.PinterestLink %>
+                <a href="$FeaturedImage4.PinterestLink"
                     class="pinterest pinit externalLink">Share on pinterest</a>
+                <% end_if %>
             </div>
         </div>
         <% end_if %>
@@ -50,8 +58,10 @@
                 style="background-image:url($FeaturedImage5.PerfectCMSImageLink('FeaturedImage'))">
                 <meta itemprop="image" content="$FeaturedImage5.AbsoluteLink">
                 </meta>
-                <a href="$ShareThisSimpleProvider.PinterestLinkForSpecificImage(FeaturedImage5).URL"
+                <% if $FeaturedImage5.PinterestLink %>
+                <a href="$FeaturedImage5.PinterestLink"
                     class="pinterest pinit externalLink">Share on pinterest</a>
+                <% end_if %>
             </div>
         </div>
         <% end_if %>
