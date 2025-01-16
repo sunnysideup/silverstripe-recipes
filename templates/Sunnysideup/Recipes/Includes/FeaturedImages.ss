@@ -2,66 +2,31 @@
     <div class="featured-carousel clearfix">
         <% if $FeaturedImage && not $HideFeaturedImageOnEntryPage %>
         <div class="featured-carousel-item">
-            <div class="featured-image"
-                style="background-image:url($FeaturedImage.PerfectCMSImageLink('FeaturedImage'))">
-                <meta itemprop="image" content="$FeaturedImage.AbsoluteLink">
-                </meta>
-                <% if $FeaturedImage.PinterestLink %>
-                <a href="$FeaturedImage.PinterestLink"
-                    class="pinterest pinit externalLink">Share on pinterest</a>
-                <% end_if %>
-
+            <div class="featured-image" style="background-image:url($FeaturedImage.PerfectCMSImageLink('FeaturedImage'))">
+            </div>
         </div>
         <% end_if %>
         <% if $FeaturedImage2 %>
         <div class="featured-carousel-item">
-            <div class="featured-image"
-                style="background-image:url($FeaturedImage2.PerfectCMSImageLink('FeaturedImage'))">
-                <meta itemprop="image" content="$FeaturedImage2.AbsoluteLink">
-                </meta>
-                <% if $FeaturedImage2.PinterestLink %>
-                <a href="$FeaturedImage2.PinterestLink"
-                    class="pinterest pinit externalLink">Share on pinterest</a>
-                <% end_if %>
+            <div class="featured-image" style="background-image:url($FeaturedImage2.PerfectCMSImageLink('FeaturedImage'))">
             </div>
         </div>
         <% end_if %>
         <% if $FeaturedImage3 %>
         <div class="featured-carousel-item">
-            <div class="featured-image"
-                style="background-image:url($FeaturedImage3.PerfectCMSImageLink('FeaturedImage'))">
-                <meta itemprop="image" content="$FeaturedImage3.AbsoluteLink">
-                </meta>
-                <% if $FeaturedImage3.PinterestLink %>
-                <a href="$FeaturedImage3.PinterestLink"
-                    class="pinterest pinit externalLink">Share on pinterest</a>
-                <% end_if %>
+            <div class="featured-image" style="background-image:url($FeaturedImage3.PerfectCMSImageLink('FeaturedImage'))">
             </div>
         </div>
         <% end_if %>
         <% if $FeaturedImage4 %>
         <div class="featured-carousel-item">
-            <div class="featured-image"
-                style="background-image:url($FeaturedImage4.PerfectCMSImageLink('FeaturedImage'))">
-                <meta itemprop="image" content="$FeaturedImage4.AbsoluteLink">
-                </meta>
-                <% if $FeaturedImage4.PinterestLink %>
-                <a href="$FeaturedImage4.PinterestLink"
-                    class="pinterest pinit externalLink">Share on pinterest</a>
-                <% end_if %>
+            <div class="featured-image" style="background-image:url($FeaturedImage4.PerfectCMSImageLink('FeaturedImage'))">
             </div>
         </div>
         <% end_if %>
         <% if $FeaturedImage5 %>
         <div class="featured-carousel-item">
-            <div class="featured-image"
-                style="background-image:url($FeaturedImage5.PerfectCMSImageLink('FeaturedImage'))">
-                <meta itemprop="image" content="$FeaturedImage5.AbsoluteLink">
-                </meta>
-                <% if $FeaturedImage5.PinterestLink %>
-                <a href="$FeaturedImage5.PinterestLink"
-                    class="pinterest pinit externalLink">Share on pinterest</a>
-                <% end_if %>
+            <div class="featured-image" style="background-image:url($FeaturedImage5.PerfectCMSImageLink('FeaturedImage'))">
             </div>
         </div>
         <% end_if %>
