@@ -24,6 +24,7 @@ use SilverStripe\View\ArrayData;
 use Sunnysideup\PdfUpload\Forms\PDFUploadField;
 use Sunnysideup\PerfectCmsImages\Forms\PerfectCmsImagesUploadField;
 use Page;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
 /**
  * Class \Sunnysideup\Recipes\Pages\Recipe
@@ -156,7 +157,7 @@ class Recipe extends BlogPost
         $fields->addFieldsToTab(
             'Root.RecipeSummary',
             [
-                PerfectCMSImagesUploadField::create('FeaturedImage', 'Featured Image', )
+                PerfectCMSImagesUploadField::create('FeaturedImage', 'Featured Image',)
                     ->setDescription('The main image for the recipe entry.')
                     ->selectFormattingStandard('FeaturedImage'),
                 CheckboxField::create('HideFeaturedImageOnEntryPage', 'Hide Image On Post Page')
@@ -446,6 +447,7 @@ class Recipe extends BlogPost
         foreach ($array as $item) {
             $item = trim((string) $item);
             if ('' !== $item) {
+                $item = DBHTMLText::create()->setValue($item);
                 $al->push(new ArrayData(['Ingredient' => $item]));
             }
         }
