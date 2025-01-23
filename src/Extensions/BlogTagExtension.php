@@ -5,7 +5,7 @@ namespace Sunnysideup\Recipes\Extensions;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use Sunnysideup\CMSNiceties\Forms\CMSNicetiesEasyRelationshipField;
 use Sunnysideup\Recipes\Pages\Recipe;
 
@@ -15,7 +15,7 @@ use Sunnysideup\Recipes\Pages\Recipe;
  * @property BlogTag|BlogTagExtension $owner
  * @property bool $ShowOnSite
  */
-class BlogTagExtension extends DataExtension
+class BlogTagExtension extends Extension
 {
     private static $db = [
         'ShowOnSite' => 'Boolean(1)',
@@ -42,7 +42,7 @@ class BlogTagExtension extends DataExtension
                 CheckboxField::create('ShowOnSite', 'Show on Site'),
             ]
         );
-        
+
         $list = Recipe::get()->sort('Title', 'ASC');
         $fields->addFieldsToTab(
             'Root.Recipes',
